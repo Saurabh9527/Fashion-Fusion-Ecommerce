@@ -1,0 +1,11 @@
+
+
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+.marquee {
+    display: flex;
+    animation: scroll 25s linear infinite;
+}
