@@ -40,8 +40,8 @@ const Navbar = () => {
 
   return (
     <div>
-      <div class="overflow-hidden pt-2">
-        <div class="marquee whitespace-nowrap font-sans text-center text-slate-950 font-medium text-base flex gap-20">
+      <div className="overflow-hidden pt-2">
+        <div className="marquee whitespace-nowrap font-sans text-center text-slate-950 font-medium text-base flex gap-20">
          <span> Made in India | Cash on Delivery Available | Free Shipping on Orders Over ₹1099 | 100% Genuine Products | Easy, Hassle-Free Returns | Secure Payments | Quality Assured | Exclusive Deals & Discounts Await!
          </span>
          <span> Limited Time Offer: 10% Off on Your First Purchase | Sign Up for Exclusive Member Benefits | Unbeatable Deals Just for You!
