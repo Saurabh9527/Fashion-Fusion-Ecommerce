@@ -9,6 +9,7 @@ import {
 import Body from './pages/Body/Body.jsx';
 import Login from './pages/Login/Login.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
+import ProductDetails from './pages/ProductDetails/ProductDetails.jsx';
 
 const router = createBrowserRouter([
       {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
           {
             path: '/home',
             element: <Body />
+          },
+          {
+            path: '/product/:prodId',
+            element: <ProductDetails />
           }
         ]
       },

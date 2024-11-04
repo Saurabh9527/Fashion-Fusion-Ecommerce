@@ -6,7 +6,7 @@ import Footer from '../src/components/Footer/Footer.jsx';
 
 const App = () => {
   return (
-    <div>
+    <div className='flex flex-col'>
         <Navbar />
         <Outlet />
         <Footer />
