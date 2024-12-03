@@ -22,8 +22,8 @@ const OffersCarousel = () => {
     }, [offersImages.length]);
 
     return (
-        <div className="relative mt-[40px] lg:mt-[60px] max-w-[500px] md:max-w-[700px] lg:max-w-[900px] xl:max-w-[1200px] mx-auto overflow-hidden">
-            <div className="relative h-[100px]">
+        <div className="relative mt-[40px] lg:mt-[60px] max-w-[500px] md:max-w-[700px] lg:max-w-[900px] xl:max-w-[1000px] mx-auto overflow-hidden">
+            <div className="relative h-[70px] md:h-[100px]">
                 {offersImages.map((image, index) => (
                     <div
                         key={index}

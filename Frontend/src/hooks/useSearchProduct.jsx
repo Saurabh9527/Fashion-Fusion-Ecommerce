@@ -3,16 +3,17 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { API_ENDPOINT } from '../apiClient/apiEndPoint';
 
-const useFetchProducts = ( pageNo, limit, category='' ) => {
+const useSearchProduct = ( query ) => {
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null);
 
     const fetchProducts = async () => {
+        if (!query) return;
         try {
             setLoading(true);
-            const { data } = await axios.get(`${API_ENDPOINT.GET.get_products}?pageNo=${pageNo}&limit=${limit}&category=${category}`);
+            const { data } = await axios.get(`${API_ENDPOINT.GET.search_products}?q=${query}&pageNo=1&limit=8`);      
             setProducts(data?.products);  
         } catch (error) {
             setError(error.message);
@@ -23,10 +24,9 @@ const useFetchProducts = ( pageNo, limit, category='' ) => {
 
     useEffect(() => {
         fetchProducts();
-    }, [pageNo, limit, category])
+    }, [query])
 
-    return { products, loading, error };
-    
+   return { products, loading, error };
 }
 
-export default useFetchProducts
+export default useSearchProduct

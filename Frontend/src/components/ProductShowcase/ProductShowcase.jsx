@@ -12,9 +12,9 @@ const ProductShowcase = () => {
     const firstProduct = products[0];
     const nextTwoProducts = products.slice(1, 3);
     const lastTwoProducts = products.slice(3, 5);
-    console.log(firstProduct);
+   // console.log(firstProduct);
     return (
-        <div className='flex flex-col lg:flex-row mt-[60px] max-w-[900px] xl:max-w-[1200px] mx-auto gap-8'> 
+        <div className='flex flex-col lg:flex-row mt-[60px] max-w-[900px] xl:max-w-[1000px] mx-auto gap-8'> 
             <div className="w-[70%] h-[70%] md:h-full md:w-full flex justify-center mx-auto">
                 <Link to={`/product/${firstProduct._id}`}> 
                     <img 

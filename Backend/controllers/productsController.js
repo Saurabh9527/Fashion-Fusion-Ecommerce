@@ -61,17 +61,71 @@ export const addProduct = asyncHandler(async (req, res) => {
   });
 });
 
+// export const fetchProduct = asyncHandler(async (req, res) => {
+//   const pageNo = parseInt(req.query.pageNo) || 1;
+//   const limit = parseInt(req.query.limit) || 8;
+
+//   const startIndex = (pageNo - 1) * limit;
+//   const products = await Product.find()
+//   .skip(startIndex)
+//   .limit(limit);
+
+//   const totalProducts = await Product.countDocuments();
+
+//   res.status(200).json({
+//     success: true,
+//     products,
+//     totalProducts,
+//     currentPage: pageNo,
+//     totalPages: Math.ceil(totalProducts / limit),
+//   });
+// });
 
 export const fetchProduct = asyncHandler(async (req, res) => {
   const pageNo = parseInt(req.query.pageNo) || 1;
-  const limit = parseInt(req.query.limit) || 10;
+  const limit = parseInt(req.query.limit) || 8;
+  const category = req.query.category || "";
 
   const startIndex = (pageNo - 1) * limit;
-  const products = await Product.find()
-  .skip(startIndex)  
-  .limit(limit); 
+  const filter =
+    category === "" ? {} : { category: { $regex: category, $options: "i" } };
 
-  const totalProducts = await Product.countDocuments();
+  const products = await Product.find(filter).skip(startIndex).limit(limit);
+
+  const totalProducts = await Product.countDocuments(filter);
+
+  res.status(200).json({
+    success: true,
+    products,
+    totalProducts,
+    currentPage: pageNo,
+    totalPages: Math.ceil(totalProducts / limit),
+  });
+});
+
+export const searchProduct = asyncHandler(async (req, res) => { 
+  const keyword = req.query.q || "";
+  const pageNo = parseInt(req.query.pageNo) || 1;
+  const limit = parseInt(req.query.limit) || 8;
+
+  if (!keyword) {
+    res.status(400);
+    throw new Error("Keyword is required for search");
+  }
+
+  const startIndex = (pageNo - 1) * limit;
+
+  const filter = {
+    $or: [
+      { title: { $regex: keyword, $options: "i" } },
+      { description: { $regex: keyword, $options: "i" } },
+      { category: { $regex: keyword, $options: "i" } },
+    ],
+  };
+
+  const products = await Product.find(filter).skip(startIndex).limit(limit);
+
+  const totalProducts = await Product.countDocuments(filter);
 
   res.status(200).json({
     success: true,
