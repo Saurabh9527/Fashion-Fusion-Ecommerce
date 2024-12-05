@@ -8,7 +8,10 @@ export default {
     extend: {
       fontFamily: {
         roboto: ["roboto", "sans-serif"]
-      }
+      },
+      colors: {
+        customGray: '#535766', 
+      },
     },
   },
   plugins: [],

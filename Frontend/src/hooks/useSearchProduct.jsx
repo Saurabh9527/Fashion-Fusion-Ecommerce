@@ -14,7 +14,7 @@ const useSearchProduct = ( query ) => {
         try {
             setLoading(true);
             const { data } = await axios.get(`${API_ENDPOINT.GET.search_products}?q=${query}&pageNo=1&limit=8`);      
-            setProducts(data?.products);  
+            setProducts(data?.products);
         } catch (error) {
             setError(error.message);
         }finally {
