@@ -8,6 +8,7 @@ const useSearchProduct = ( query ) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null);
+    const [totalPages, setTotalPages] = useState(null);
 
     const fetchProducts = async () => {
         if (!query) return;
@@ -15,6 +16,7 @@ const useSearchProduct = ( query ) => {
             setLoading(true);
             const { data } = await axios.get(`${API_ENDPOINT.GET.search_products}?q=${query}&pageNo=1&limit=8`);      
             setProducts(data?.products);
+            setTotalPages(data?.totalPages);
         } catch (error) {
             setError(error.message);
         }finally {
@@ -26,7 +28,7 @@ const useSearchProduct = ( query ) => {
         fetchProducts();
     }, [query])
 
-   return { products, loading, error };
+   return { products, loading, error, totalPages };
 }
 
 export default useSearchProduct

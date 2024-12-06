@@ -11,8 +11,8 @@ const Products = () => {
   const [category, setCategory] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { products: paginatedProducts, loading: paginatedLoading, error: paginatedError } = useFetchProducts(pageNo, 8, category);
-  const { products: searchProducts, loading: searchLoading, error: searchError } = useSearchProduct(searchQuery);
+  const { products: paginatedProducts, loading: paginatedLoading, error: paginatedError, totalPages: paginatedTotalPages } = useFetchProducts(pageNo, 8, category);
+  const { products: searchProducts, loading: searchLoading, error: searchError, totalPages: searchTotalPages } = useSearchProduct(searchQuery);
 
   //  TODO create separate categories component for this categories
   // TODO here not use API for earch product by searchquery instead use when user select suggestion from suggestion list
@@ -35,6 +35,7 @@ const Products = () => {
   }
 
   const displayProducts = searchQuery ? searchProducts : paginatedProducts;
+  const totalPages = searchQuery ? searchTotalPages : paginatedTotalPages;
   // console.log(displayProducts);
 
   return (
@@ -72,7 +73,7 @@ const Products = () => {
       </div>
 
       {/* Pagination */}
-      <Pagination pageNo = {pageNo} onPageChange = {handlePageChange} />
+      <Pagination pageNo = {pageNo} onPageChange = {handlePageChange} totalPages={totalPages} />
     </div>
   )
 }

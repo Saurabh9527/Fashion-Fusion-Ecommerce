@@ -9,17 +9,21 @@ const ProductItem = ({ product }) => {
     <Link to={`/product/${product._id}`}>
       <div className="max-w-sm bg-white border border-gray-50 rounded-md shadow-md ">
         <div>
-          <img className="rounded-t-lg" src={product.thumbnail} alt="" />
+          <img 
+          className="rounded-t-lg w-full h-[300px] object-cover" 
+          src={product.thumbnail} alt="" />
         </div>
         <div className="p-2 mb-4">
           <div>
-            <h3 className='mb-2 text-base font-semibold'>{product.brand}</h3>
+            <h3 className='mb-2 text-base font-semibold'>{product.brand || product.category}</h3>
           </div>
           <div className=''>
             <h4 className="mb-2 text-sm font-sans text-customGray tracking-tight truncate ">{product.title}</h4>
           </div>
           <div className='flex justify-between items-baseline'>
-            <span className='text-base font-semibold font-sans'>Rs. {product.price}</span>
+            <span className='text-base font-semibold font-sans'>
+            Rs. {product.price.toString().length > 6 ? Math.round(product.price) : product.price}
+            </span>
             <span className='text-xs text-customGray line-through'>
               Rs. {(
                 product.price / (1 - product.discountPercentage / 100)

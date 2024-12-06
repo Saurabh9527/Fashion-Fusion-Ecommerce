@@ -8,12 +8,15 @@ const useFetchProducts = ( pageNo, limit, category='' ) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null);
+    const [totalPages, setTotalPages] = useState(null);
+
     const fetchProducts = async () => {
         try {
             setLoading(true);
             const { data } = await axios.get(`${API_ENDPOINT.GET.get_products}?pageNo=${pageNo}&limit=${limit}&category=${category}`);
             setProducts(data?.products); 
             console.log(data);
+            setTotalPages(data?.totalPages);
              
         } catch (error) {
             setError(error.message);
@@ -26,7 +29,7 @@ const useFetchProducts = ( pageNo, limit, category='' ) => {
         fetchProducts();
     }, [pageNo, limit, category])
 
-    return { products, loading, error };
+    return { products, loading, error, totalPages };
     
 }
 
