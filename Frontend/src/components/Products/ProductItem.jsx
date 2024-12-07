@@ -3,16 +3,18 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const ProductItem = ({ product }) => {
- // console.log(product);
-
+ //console.log(product.images);
+  //TODO: create carousel for images 
   return (
     <Link to={`/product/${product._id}`}>
       <div className="max-w-sm bg-white border border-gray-50 rounded-md shadow-md ">
+
         <div>
           <img 
           className="rounded-t-lg w-full h-[300px] object-cover" 
           src={product.thumbnail} alt="" />
         </div>
+
         <div className="p-2 mb-4">
           <div>
             <h3 className='mb-2 text-base font-semibold'>{product.brand || product.category}</h3>

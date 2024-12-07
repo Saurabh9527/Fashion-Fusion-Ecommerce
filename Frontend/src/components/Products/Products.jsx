@@ -5,6 +5,7 @@ import useFetchProducts from '../../hooks/useFetchProducts';
 import useSearchProduct from '../../hooks/useSearchProduct';
 import ProductItem from './ProductItem';
 import Pagination from '../Pagination/Pagination';
+import Categories from './Categories';
 
 const Products = () => {
   const [pageNo, setPageNo] = useState(1);
@@ -16,10 +17,10 @@ const Products = () => {
 
   //  TODO create separate categories component for this categories
   // TODO here not use API for earch product by searchquery instead use when user select suggestion from suggestion list
-  
+
 
   const handleCategoryChange = (newCategory) => {
-    searchQuery('')
+    setSearchQuery('')
     setCategory(newCategory);
     setPageNo(1);
   }
@@ -30,8 +31,8 @@ const Products = () => {
     setPageNo(1);
   }
 
-  const handlePageChange = ( newPage ) => {
-      setPageNo(newPage)
+  const handlePageChange = (newPage) => {
+    setPageNo(newPage)
   }
 
   const displayProducts = searchQuery ? searchProducts : paginatedProducts;
@@ -41,17 +42,10 @@ const Products = () => {
   return (
     <div className='flex flex-col mt-[60px] max-w-[500px] md:max-w-[700px] lg:max-w-[900px] xl:max-w-[1000px] mx-auto border border-zinc-300 rounded'>
       <div className='flex justify-between items-center p-2'>
-        <div className='group hidden md:block'>
-          <ul className='flex justify-between items-center space-x-3 cursor-pointer '>
-            <li className='text-gray-700 hover:text-gray-900 hover:border-b-2 hover:border-gray-700 transition-all duration-300' onClick={() => { handleCategoryChange('') }}>All Products</li>
-            <li className='text-gray-700 hover:text-gray-900 hover:border-b-2 hover:border-gray-700 transition-all duration-30' onClick={() => { handleCategoryChange('Men') }}>Men</li>
-            <li className='text-gray-700 hover:text-gray-900 hover:border-b-2 hover:border-gray-700 transition-all duration-30' onClick={() => { handleCategoryChange('Women') }}>Women</li>
-            <li className='text-gray-700 hover:text-gray-900 hover:border-b-2 hover:border-gray-700 transition-all duration-30' onClick={() => { handleCategoryChange('Watches') }}>Watches</li>
-            <li className='text-gray-700 hover:text-gray-900 hover:border-b-2 hover:border-gray-700 transition-all duration-30' onClick={() => { handleCategoryChange('Shoes') }}>Shoes</li>
-          </ul>
-        </div>
+        {/* Categories */}
+        <Categories handleCategoryChange={handleCategoryChange} />
 
-          {/* SearchBox */}
+        {/* SearchBox */}
         <input
           type="search"
           placeholder='Search products...'
@@ -73,7 +67,7 @@ const Products = () => {
       </div>
 
       {/* Pagination */}
-      <Pagination pageNo = {pageNo} onPageChange = {handlePageChange} totalPages={totalPages} />
+      <Pagination pageNo={pageNo} onPageChange={handlePageChange} totalPages={totalPages} />
     </div>
   )
 }
