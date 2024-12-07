@@ -5,6 +5,8 @@ import BrandList from '../../components/BrandList/BrandList'
 import ProductShowcase from '../../components/ProductShowcase/ProductShowcase'
 import OffersCarousel from '../../components/Carousel/OffersCarousel'
 import Products from '../../components/Products/Products'
+import BrandBanner from '../../components/BrandBanner/BrandBanner'
+import ProductCarousel from '../../components/Product-Carousel/ProductCarousel'
 
 const Body = () => {
   return (
@@ -14,6 +16,8 @@ const Body = () => {
       <ProductShowcase />
       <OffersCarousel />
       <Products />
+      <BrandBanner />
+      <ProductCarousel />
     </div>
   )
 }

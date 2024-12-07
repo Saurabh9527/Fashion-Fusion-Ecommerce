@@ -15,7 +15,6 @@ const Products = () => {
   const { products: paginatedProducts, loading: paginatedLoading, error: paginatedError, totalPages: paginatedTotalPages } = useFetchProducts(pageNo, 8, category);
   const { products: searchProducts, loading: searchLoading, error: searchError, totalPages: searchTotalPages } = useSearchProduct(searchQuery);
 
-  //  TODO create separate categories component for this categories
   // TODO here not use API for earch product by searchquery instead use when user select suggestion from suggestion list
 
 
@@ -40,7 +39,7 @@ const Products = () => {
   // console.log(displayProducts);
 
   return (
-    <div className='flex flex-col mt-[60px] max-w-[500px] md:max-w-[700px] lg:max-w-[900px] xl:max-w-[1000px] mx-auto border border-zinc-300 rounded'>
+    <div className='flex flex-col mt-[60px] max-w-[500px] md:max-w-[700px] lg:max-w-[900px] xl:max-w-[1000px] mx-auto border border-zinc-100 rounded mb-10'>
       <div className='flex justify-between items-center p-2'>
         {/* Categories */}
         <Categories handleCategoryChange={handleCategoryChange} />
@@ -56,8 +55,9 @@ const Products = () => {
 
         {/* Cards */}
       </div>
+      <hr className='m-1'/>
       <div className='p-2 mt-4'>
-        <div className='grid grid-cols-4 gap-x-5 gap-y-6' >
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-6' >
           {
             displayProducts.map((product) => (
               <ProductItem key={product._id} product={product} />

@@ -14,7 +14,7 @@ const Pagination = ({ pageNo, onPageChange, totalPages }) => {
     }
 
     return (
-        <div className="flex items-center gap-x-4 mx-auto mt-8 mb-2">
+        <div className="flex items-center gap-x-4 mx-auto mt-8 mb-4">
 
             <span
                 className={`flex items-center justify-center border font-medium px-5 py-2 rounded-md  cursor-pointer
