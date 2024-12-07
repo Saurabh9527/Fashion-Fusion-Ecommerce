@@ -7,6 +7,7 @@ import OffersCarousel from '../../components/Carousel/OffersCarousel'
 import Products from '../../components/Products/Products'
 import BrandBanner from '../../components/BrandBanner/BrandBanner'
 import ProductCarousel from '../../components/Product-Carousel/ProductCarousel'
+import Promotions from '../../components/Promotions/Promotions'
 
 const Body = () => {
   return (
@@ -18,6 +19,7 @@ const Body = () => {
       <Products />
       <BrandBanner />
       <ProductCarousel />
+      <Promotions />
     </div>
   )
 }

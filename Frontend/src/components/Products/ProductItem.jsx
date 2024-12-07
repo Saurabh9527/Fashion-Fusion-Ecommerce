@@ -11,7 +11,7 @@ const ProductItem = ({ product }) => {
       <div className="max-w-sm bg-white border border-gray-50 rounded-md shadow-md ">
         <div>
           <img 
-          className="rounded-t-lg w-full h-[200px] sm:h-[300px] object-cover" 
+          className="rounded-t-lg w-full h-[200px] sm:h-[250px] object-cover" 
           src={product.thumbnail} alt="" />
         </div>
 
