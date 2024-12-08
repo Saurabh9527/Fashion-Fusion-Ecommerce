@@ -8,14 +8,8 @@ const FollowSubscribeWidget = () => {
 
   return (
     <div className='mt-12'>
-      <h2 className='max-w-[80%] mx-auto text-2xl font-medium font-roboto text-center'>Follow Products And Discount On Instagram</h2>
-      <div className='flex space-x-2 mt-10'>
-        {
-            products.map((product) => (
-                <FollowSubscribeWidgetProduct key={product._id} product={product}/>
-            ))
-        }
-      </div>
+      <h2 className=' sm:max-w-[80%] text-center mx-auto text-base sm:text-lg md:text-xl lg:text-3xl font-medium font-roboto '>Follow Products And Discount On Instagram</h2>
+      <FollowSubscribeWidgetProduct product={products}/>
     </div>
   )
 }
