@@ -103,7 +103,7 @@ export const fetchProduct = asyncHandler(async (req, res) => {
   });
 });
 
-export const searchProduct = asyncHandler(async (req, res) => { 
+export const searchProduct = asyncHandler(async (req, res) => {
   const keyword = req.query.q || "";
   const pageNo = parseInt(req.query.pageNo) || 1;
   const limit = parseInt(req.query.limit) || 8;
@@ -134,4 +134,20 @@ export const searchProduct = asyncHandler(async (req, res) => {
     currentPage: pageNo,
     totalPages: Math.ceil(totalProducts / limit),
   });
+});
+
+export const getProduct = asyncHandler(async (req, res) => {
+  const { prodId } = req.params;
+
+  const product = await Product.findById(prodId);
+
+  if (product) {
+    res.status(200).json({
+      success: true,
+      product,
+    }); 
+  } else {
+    res.status(404); 
+    throw new Error("Product not found");
+  }
 });

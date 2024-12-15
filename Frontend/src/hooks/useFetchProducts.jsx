@@ -15,9 +15,8 @@ const useFetchProducts = ( pageNo, limit, category='' ) => {
             setLoading(true);
             const { data } = await axios.get(`${API_ENDPOINT.GET.get_products}?pageNo=${pageNo}&limit=${limit}&category=${category}`);
             setProducts(data?.products); 
-            console.log(data);
-            setTotalPages(data?.totalPages);
-             
+            //console.log(data);
+            setTotalPages(data?.totalPages);            
         } catch (error) {
             setError(error.message);
         }finally {
