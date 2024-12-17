@@ -105,7 +105,7 @@ const Navbar = () => {
           <div>
             <FaHeart
               aria-label='Wishlist'
-              className='size-8 text-slate-800 cursor-pointer hover:text-slate-900'
+              className='size-8 text-rose-600 cursor-pointer hover:text-rose-500'
               onClick={handleWishList} />
           </div>
         </div>

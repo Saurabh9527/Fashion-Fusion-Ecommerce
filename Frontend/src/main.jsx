@@ -10,36 +10,49 @@ import Body from './pages/Body/Body.jsx';
 import Login from './pages/Login/Login.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
 import ProductDetails from './pages/ProductDetails/ProductDetails.jsx';
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
+import Cart from './pages/Cart/Cart.jsx';
+import { AuthProvider } from './Context/AuthProvider.jsx';
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
       {
-        path: '/',
-        element: <App />,
-        children: [
-          {
-            index: true,
-            element: <Body />
-          },
-          {
-            path: '/home',
-            element: <Body />
-          },
-          {
-            path: '/product/:prodId',
-            element: <ProductDetails />
-          }
-        ]
+        index: true,
+        element: <Body />
       },
       {
-        path: "/login",
-        element: <Login />,
+        path: '/home',
+        element: <Body />
       },
       {
-        path: "*",
-        element: <NotFound />,
-      },
+        path: '/product/:prodId',
+        element: <ProductDetails />
+      }
+    ]
+  },
+  {
+    path: "/cart",
+    element: (
+      <ProtectedRoute>
+        <Cart />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(
+  <AuthProvider>
     <RouterProvider router={router} />
+  </AuthProvider>
 )

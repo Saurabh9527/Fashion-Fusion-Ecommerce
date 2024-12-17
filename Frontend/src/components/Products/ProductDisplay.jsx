@@ -2,8 +2,12 @@
 import React, { useState } from 'react'
 import ProductDescription from './ProductDescription';
 import ProductOffers from './ProductOffers/ProductOffers';
+import useSimillarProducts from '../../hooks/useSimillarProducts';
+import SimilarProducts from './SimilarProducts';
 
 const ProductDisplay = ({ product }) => {
+
+   const {products, loading, error} =useSimillarProducts(product.category)
 
   const [index, setIndex] = useState(0);
 
@@ -16,7 +20,7 @@ const ProductDisplay = ({ product }) => {
  //below the  640 everything flex-col one by one below
 
   return (
-    <div className='flex flex-col ml-2 mr-2 sm:ml-5 sm:mr-5 lg:max-w-[1000px] xl:max-w-[1200px] lg:mx-auto pt-8  mb-10'>
+    <div className='flex flex-col ml-2 mr-2 sm:ml-5 sm:mr-5 lg:max-w-[1000px] xl:max-w-[1200px] lg:mx-auto pt-8 mb-10'>
       <div><p>Home/</p></div>
       <div className='flex flex-wrap sm:flex-nowrap mt-5 sm:space-x-4'>    
           <div className='flex flex-col'>
@@ -47,6 +51,10 @@ const ProductDisplay = ({ product }) => {
       <hr className='h-[2px] bg-gray-50'/>
       <div className='mt-10 sm:ml-auto'>
         <ProductOffers />
+      </div>
+      <div className='mt-20'>
+        <h3 className='mb-3 font-semibold font-sans'>SIMILAR PRODUCTS</h3>
+        <SimilarProducts products={products}/>
       </div>
     </div>
   )

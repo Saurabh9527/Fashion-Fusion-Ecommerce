@@ -151,3 +151,19 @@ export const getProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
+
+export const getSimillarProduct =  asyncHandler(async (req, res) => {
+  const category  = req.query.category;
+
+  if ( !category ) {
+    res.status(400);
+    throw new Error("Please provide a category");
+  }
+  
+  const products = await Product.find({ category: category});
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
+});
