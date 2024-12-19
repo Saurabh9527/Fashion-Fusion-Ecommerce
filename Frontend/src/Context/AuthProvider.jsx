@@ -9,6 +9,21 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
+//TODO write two function here setToken and remove token and pass as argument via this context and use in login and  in logout function in our componenet
+
+const setToken = (token) => {
+  localStorage.setItem("jwtToken", token);
+};
+
+const getToken = () => {
+  return localStorage.getItem("jwtToken");
+};
+
+const removeToken = () => {
+  localStorage.removeItem("jwtToken");
+};
+
+
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
 
@@ -40,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, setToken, getToken, removeToken }}>
       {children}
     </AuthContext.Provider>
   );

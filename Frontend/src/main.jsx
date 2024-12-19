@@ -11,8 +11,11 @@ import Login from './pages/Login/Login.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
 import ProductDetails from './pages/ProductDetails/ProductDetails.jsx';
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
-import Cart from './pages/Cart/Cart.jsx';
 import { AuthProvider } from './Context/AuthProvider.jsx';
+import Cart from './pages/ProtectedRoutes/Cart/Cart.jsx';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
@@ -30,16 +33,16 @@ const router = createBrowserRouter([
       {
         path: '/product/:prodId',
         element: <ProductDetails />
-      }
+      },
+      {
+        path: "/cart",
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      }, 
     ]
-  },
-  {
-    path: "/cart",
-    element: (
-      <ProtectedRoute>
-        <Cart />
-      </ProtectedRoute>
-    ),
   },
   {
     path: "/login",
@@ -54,5 +57,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <AuthProvider>
     <RouterProvider router={router} />
+    <ToastContainer />
   </AuthProvider>
 )

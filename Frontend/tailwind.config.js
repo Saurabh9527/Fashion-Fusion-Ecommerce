@@ -14,7 +14,8 @@ export default {
       },
       screens: {
         'custom': '905px', 
-        'custom2': '805px'
+        'custom2': '805px',
+        'custom3': '520px',
       },
     },
   },

@@ -5,6 +5,7 @@ import { FaCartArrowDown } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
 import triangleLogo from '../../assets/Group.png'
 import './Navbar.css'
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -30,9 +31,9 @@ const Navbar = () => {
     console.log("Login Signup Clicked");
   }
 
-  const handleCart = () => {
-    console.log("Cart Clicked");
-  }
+  // const handleCart = () => {
+  //   console.log("Cart Clicked");
+  // }
 
   const handleWishList = () => {
     console.log("Wishlish Clicked");
@@ -90,9 +91,8 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          <div
+          <Link to={'/cart'}
             className='relative cursor-pointer'
-            onClick={handleCart}
           >
             <FaCartArrowDown
               aria-label='Cart'
@@ -101,7 +101,7 @@ const Navbar = () => {
             >
               4
             </div>
-          </div>
+          </Link>
           <div>
             <FaHeart
               aria-label='Wishlist'

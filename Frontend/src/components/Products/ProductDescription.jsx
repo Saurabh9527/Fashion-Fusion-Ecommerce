@@ -1,9 +1,97 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { MdOutlineStar } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
+import AuthContext from '../../Context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { API_ENDPOINT } from '../../apiClient/apiEndPoint';
 
 const ProductDescription = ({ product }) => {
+  const { getToken, isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleAddToCart = async ( prodId ) => {
+    const token = getToken();
+
+    if (!token ) { 
+     toast.info(
+      <div>
+        Please <span 
+          onClick={() => navigate("/login")} 
+          style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}>
+          Login
+        </span> to add the product to the cart.
+      </div>,
+      {
+        position: "top-center",
+        autoClose: true, // Keep the toast open until user interacts
+        closeOnClick: false,
+        hideProgressBar: false,
+        theme: "colored",
+      }
+    );
+      return;
+    }
+
+    if (!isAuthenticated) {
+      // Token exists but is invalid or expired
+      toast.info(
+        <div>
+          Your session has expired. Please{" "}
+          <span
+            onClick={() => navigate("/login")}
+            style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
+          >
+            Login
+          </span>{" "}
+          again.
+        </div>,
+        {
+          position: "top-center",
+          autoClose: true,
+          closeOnClick: false,
+          hideProgressBar: false,
+          theme: "colored",
+        }
+      );
+      return;
+    }
+
+    try {
+      const payload = {
+        productId: prodId,
+      };
+
+      const config = {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
+      };
+
+      const response = await axios.post(`${API_ENDPOINT.POST.add_to_cart}`, payload, config);
+     // console.log(response);
+      if(response.status === 200){
+        toast.success("Product added successfully")
+      }
+      
+    } catch (error) {
+      
+      if(error.status===400 || error.status===401){
+          toast.error("Something went wrong")
+      }else{
+        toast.error("An unexpected error occurred");
+      }
+    } 
+  }
+
+  const handleAddToWishlist = async () => {
+
+  }
+
   return (
     <div className='flex flex-col p-1 pl-3 pt-2'>
       <h2 className='font-roboto font-medium text-sm sm:text-base md:text-xl'>{product.title}</h2>
@@ -26,7 +114,9 @@ const ProductDescription = ({ product }) => {
       </div>
       <p className='text-green-900 font-medium font-roboto pt-2 mt-1'>inclusive of all taxes</p>
       <div className='flex flex-col items-center pt-2 mt-4 gap-4 mb-8 custom:flex-row'>
-        <button className='border px-12 py-3 rounded-md text-center text-base font-medium font-roboto bg-rose-500 hover:bg-red-600 text-white w-full'>ADD TO BAG</button>
+        <button 
+        className='border px-12 py-3 rounded-md text-center text-base font-medium font-roboto bg-rose-500 hover:bg-red-600 text-white w-full'
+        onClick={()=> handleAddToCart(product._id) }>ADD TO BAG</button>
         <button
           className='border px-12 py-3 rounded-md text-center text-base font-medium font-sans flex items-center justify-center gap-1 hover:border-gray-400 w-full'>
           <CiHeart className='size-5' />
