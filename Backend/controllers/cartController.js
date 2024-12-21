@@ -69,6 +69,7 @@ export const fetchCartProducts = asyncHandler(async (req, res) => {
 
 export const updateCartProduct = asyncHandler (async (req, res) => {
      //* try to take quanity in like options arrow like amazon
+     
      const userId = req.user._id.toString();
      const { productId } = req.params;
      const { quantity } = req.body;

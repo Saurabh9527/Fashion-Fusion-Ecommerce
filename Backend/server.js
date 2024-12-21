@@ -14,16 +14,17 @@ dotenv.config({
   path: ".env",
 });
 const app = express();
-app.use(bodyParser.json());
 
 const corsOptions = {
   //origin: "*",
-  origin: ["http://localhost:5173"], 
-  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+  origin: "http://localhost:5173", 
+  methods: ["GET", "POST", "HEAD", "PUT", "DELETE", "PATCH"],
   credentials: true,
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+app.use(bodyParser.json());
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/product", productsRoutes);

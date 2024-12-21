@@ -2,18 +2,22 @@
 import React, { useContext } from 'react'
 import useCartProduct from '../../../hooks/useCartProduct'
 import CartProduct from '../../../components/Cart/CartProduct';
+import OrderSummary from '../../../components/Cart/OrderSummary';
 
 const Cart = () => {
-  const { products, loading, error } = useCartProduct();
+  const { products, loading, error, refetch } = useCartProduct();
+
+  const refreshCart = () => {
+    refetch(); 
+  };
 
   if (error) {
     return <div>{error}</div>
   }
   if (loading) {
-    return <div>Loading</div>
+    return <div>{console.log("i am loaded")}</div> 
+    // TODO show here shimme ui when qyantity update
   }
-
-console.log(products);
 
   return (
     <div>
@@ -22,9 +26,12 @@ console.log(products);
         <div className=' border border-gray-100 rounded-lg shadow-md'>
         <div className='flex flex-col p-3 sm:p-5 gap-6'>
         {products.map((product) => (
-          <CartProduct key={product._id} product={product} />
+          <CartProduct key={product._id} product={product} onQuantityUpdate={refreshCart}/>
         ))}
         </div>
+        </div>
+        <div className='self-end mt-5 border border-gray-100 rounded-lg shadow-md'>
+          <OrderSummary products={products}/>
         </div>
       </div>
     </div>

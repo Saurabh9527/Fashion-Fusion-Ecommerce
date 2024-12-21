@@ -37,7 +37,7 @@ const useCartProduct = () => {
             fetchCartProducts();
         }, [])
     
-       return { products, loading, error };
+       return { products, loading, error, refetch: fetchCartProducts };
 }
 
 export default useCartProduct
