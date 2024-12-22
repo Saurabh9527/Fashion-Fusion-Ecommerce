@@ -5,11 +5,12 @@ import { FaCartArrowDown } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
 import triangleLogo from '../../assets/Group.png'
 import './Navbar.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setIsProfileOpen(true);
@@ -20,7 +21,7 @@ const Navbar = () => {
   };
 
   const handleLogo = () => {
-    console.log("Logo clicked");
+    navigate('/home')
   }
 
   const handleProfile = () => {

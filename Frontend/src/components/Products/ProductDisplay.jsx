@@ -4,24 +4,29 @@ import ProductDescription from './ProductDescription';
 import ProductOffers from './ProductOffers/ProductOffers';
 import useSimillarProducts from '../../hooks/useSimillarProducts';
 import SimilarProducts from './SimilarProducts';
+import { useNavigate } from 'react-router-dom';
 
 const ProductDisplay = ({ product }) => {
 
-   const {products, loading, error} =useSimillarProducts(product.category)
-
+  const {products, loading, error} =useSimillarProducts(product.category)
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
 
   const handleImageClick = () => {
     setIndex((prevIndex) => (prevIndex + 1) % product.images.length);
   }
 
- // @above the 768 all it's good 
- //below the 768 till 640 only details take below
- //below the  640 everything flex-col one by one below
+  const handleHomeNavigation = () => {
+      navigate('/home')
+  }
 
   return (
     <div className='flex flex-col ml-2 mr-2 sm:ml-5 sm:mr-5 lg:max-w-[1000px] xl:max-w-[1200px] lg:mx-auto pt-8 mb-10'>
-      <div><p>Home/</p></div>
+      <div>
+        <p 
+        className='text-customGray text-sm pl-2 cursor-pointer'
+        onClick={handleHomeNavigation}>Home</p>
+      </div>
       <div className='flex flex-wrap sm:flex-nowrap mt-5 sm:space-x-4'>    
           <div className='flex flex-col'>
             {product.images.map((img, index) => (

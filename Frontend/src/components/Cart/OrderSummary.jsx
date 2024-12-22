@@ -1,5 +1,6 @@
 
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const OrderSummary = ({ products }) => {
 
@@ -8,10 +9,12 @@ const OrderSummary = ({ products }) => {
         0
     );
 
+    const roundedTotalPrice = Number(totalPrice.toFixed(2));
+
     const deliveryCharges = totalPrice < 400 ? '₹40' : 'free';
     const discount = totalPrice > 500 ? '₹20' : '₹0';
 
-    const finalAmount = totalPrice + (totalPrice < 400 ? 40 : 0) + (totalPrice > 500 ? 20 : 0);
+    const finalAmount = Number((totalPrice + (totalPrice < 400 ? 40 : 0) + (totalPrice > 500 ? 20 : 0)).toFixed(2));
 
     return (
         <div className='pl-4 pr-4 pt-4'>
@@ -27,7 +30,7 @@ const OrderSummary = ({ products }) => {
                 </div>
                 <div className='flex items-center justify-between'>
                     <h2 className='font-normal font-roboto'>Subtotal</h2>
-                    <h3 className='font-roboto font-normal text-sm text-gray-800'>₹{totalPrice}</h3>
+                    <h3 className='font-roboto font-normal text-sm text-gray-800'>₹{roundedTotalPrice}</h3>
                 </div>
                 <div className='flex items-center justify-between'>
                     <h2 className='font-normal font-roboto'>Delivery Charges</h2>
@@ -43,7 +46,7 @@ const OrderSummary = ({ products }) => {
                     <h2 className='font-normal font-roboto'>Total</h2>
                     <h3 className='font-roboto font-normal text-sm text-gray-800'>₹{finalAmount}</h3>
                 </div>
-                <button className='mt-4 border py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 font-roboto font-medium'>Continue</button>
+                <Link to={'/checkout'} className='mt-4 border py-2 rounded-md bg-slate-800 text-white hover:bg-slate-900 font-roboto font-medium text-center'>Continue</Link>
             </div>
         </div>
     )

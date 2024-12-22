@@ -16,6 +16,7 @@ import Cart from './pages/ProtectedRoutes/Cart/Cart.jsx';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CheckoutPage from './pages/ProtectedRoutes/Checkout/CheckoutPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,12 +42,20 @@ const router = createBrowserRouter([
             <Cart />
           </ProtectedRoute>
         ),
-      }, 
+      },
     ]
   },
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/checkout",
+    element: (
+      <ProtectedRoute>
+        <CheckoutPage />
+      </ProtectedRoute>
+    )
   },
   {
     path: "*",
