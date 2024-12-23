@@ -1,8 +1,12 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
+import AuthContext from '../../Context/AuthProvider';
+import { API_ENDPOINT } from '../../apiClient/apiEndPoint';
+import axios from 'axios';
 
-const AddressModals = ({ handleCloseModal }) => {
+const AddressModals = ({ handleCloseModal, triggerRefetch }) => {
+    const { getToken } = useContext(AuthContext);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -33,12 +37,39 @@ const AddressModals = ({ handleCloseModal }) => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const allFieldsFilled = Object.values(formData).every((value) => value.trim() !== "");
         if (allFieldsFilled) {
-            console.log("Form submitted successfully:", formData);
-            handleCloseModal(); 
+            const token = getToken();
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            };
+            try {
+                const { data } = await axios.post(`${API_ENDPOINT.POST.add_new_address}/addNewAddress`, formData, config)
+                if(data.success) {
+                    setFormData({
+                        fullName: "",
+                        mobileNumber: "",
+                        pincode: "",
+                        address: "",
+                        landmark: "",
+                        city: "",
+                        state: "",
+                    });
+                    triggerRefetch();
+                }
+            } catch (error) {
+                console.error("Error submitting form:", error); // Log or display the error
+                alert("Something went wrong. Please try again.");
+            } finally {
+                handleCloseModal();
+            }
+            
         } else {
             alert("Please fill in all fields before submitting.");
         }

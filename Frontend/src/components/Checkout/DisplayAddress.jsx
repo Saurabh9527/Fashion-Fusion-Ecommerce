@@ -1,13 +1,20 @@
 
 import React, { useState } from 'react'
 
-const DisplayAddress = ({ address }) => {
+const DisplayAddress = ({ address, handleSetDeliveryAddress, handleDeleteAddress }) => {
 
 
     const handleAddressSelect = (addressId) => {
-        console.log("i clicked on " + addressId);
-
+        handleSetDeliveryAddress(addressId);
     };
+
+    const handleAddressDelete = (addressId) => {
+        if (window.confirm('Are you sure you want to delete this address?')) {
+            console.log(addressId); 
+            handleDeleteAddress(addressId)
+          }
+         
+    }
 
     return (
         <div className="p-3 ">
@@ -30,8 +37,14 @@ const DisplayAddress = ({ address }) => {
                 <span>{address?.state}, </span>
                 <span>{address?.pincode}</span>
             </label>
+            <div>
             <button 
             className='self-start text-blue-500 hover:text-blue-700 hover:underline'>Edit Address</button>
+            <button 
+            className='self-start text-blue-500 hover:text-blue-700 hover:underline ml-2
+            '
+            onClick={() => handleAddressDelete(address._id)}>Delete Address</button>
+            </div>
             </div>
             </div>
         </div>

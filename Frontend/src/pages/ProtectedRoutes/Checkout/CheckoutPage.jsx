@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import AddressForm from '../../../components/Checkout/AddressForm'
 import PaymentMethodSelector from '../../../components/Checkout/PaymentMethodSelector'
 import OrderSummary from '../../../components/Checkout/OrderSummary'
@@ -7,14 +7,40 @@ import Logo from '../../../assets/Logo.jpg'
 import { CiLock } from "react-icons/ci";
 import { FaCartArrowDown } from "react-icons/fa";
 import useFetchAddress from '../../../hooks/useFetchAddress'
+import CheckoutFooter from '../../../components/Checkout/CheckoutFooter'
+import axios from 'axios';
+import AuthContext from '../../../Context/AuthProvider'
+import { API_ENDPOINT } from '../../../apiClient/apiEndPoint'
 
 const CheckoutPage = () => {
 
-    const { addresses, loading, error } = useFetchAddress();
+    const { addresses, loading, error, triggerRefetch } = useFetchAddress();
     const[toggle, setToggle] = useState(false);
+    const { getToken } = useContext(AuthContext);
 
     const handleToggle = () => {
         setToggle(!toggle);
+    }
+
+    const handleDeleteAddress = async (addressId) => {
+        const token = getToken();
+
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`, 
+                    "Content-Type": "application/json", 
+                },
+                withCredentials: true,
+            };
+            const {data} = await axios.delete(`${API_ENDPOINT.DELETE.delete_address}/deleteAddress/${addressId}`, config)
+            console.log(data);
+            triggerRefetch();
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
 
     return (
@@ -33,14 +59,17 @@ const CheckoutPage = () => {
             </div>
             <div className='flex flex-col md:flex-row p-6'>
                 <div className='flex flex-col'>
-                    <AddressForm addresses={addresses} handleToggle={handleToggle} toggle={toggle}/>
+                    <AddressForm 
+                    addresses={addresses} handleToggle={handleToggle} toggle={toggle} handleDeleteAddress={handleDeleteAddress} triggerRefetch={triggerRefetch}/>
                     <PaymentMethodSelector />
                 </div>
                 <div>
                     <OrderSummary />
                 </div>
             </div>
-            <div>footer</div>
+            <div className='mt-20'>
+                <CheckoutFooter />
+            </div>
         </div>
     )
 }

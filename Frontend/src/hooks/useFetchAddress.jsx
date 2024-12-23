@@ -9,6 +9,7 @@ const useFetchAddress = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null);
     const { getToken } = useContext(AuthContext);
+    const [refresh, setRefresh] = useState(false);
 
     const fetchAddresses = async() =>{
         const token = getToken();
@@ -32,9 +33,18 @@ const useFetchAddress = () => {
 
     useEffect(() => {
         fetchAddresses();
-    }, [])
+    }, [refresh])
 
-    return { addresses, loading, error };
+    const triggerRefetch = () => {
+        setRefresh(prev => !prev); // Toggle `refresh` state to trigger the effect
+      };
+
+    return { 
+        addresses, 
+        loading, 
+        error,
+        triggerRefetch
+     };
 
 }
 

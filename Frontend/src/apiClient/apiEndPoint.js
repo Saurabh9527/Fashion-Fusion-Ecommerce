@@ -13,12 +13,14 @@ export const API_ENDPOINT = {
     POST:{
         get_auth: `${BASEURL}/api/v1/auth/validate`,
         add_to_cart: `${BASEURL}/api/v1/cart`,
-        add_to_wishlist: `${BASEURL}/api/v1/wishlist`
+        add_to_wishlist: `${BASEURL}/api/v1/wishlist`,
+        add_new_address: `${BASEURL}/api/v1/address`,
     },
     PATCH: {
         update_quantity: `${BASEURL}/api/v1/cart`
     },
     DELETE:{
-        delete_cart_product: `${BASEURL}/api/v1/cart`
+        delete_cart_product: `${BASEURL}/api/v1/cart`,
+        delete_address: `${BASEURL}/api/v1/address`
     }
 }
