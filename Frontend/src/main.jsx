@@ -17,6 +17,7 @@ import Cart from './pages/ProtectedRoutes/Cart/Cart.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CheckoutPage from './pages/ProtectedRoutes/Checkout/CheckoutPage.jsx';
+import CategoriesProducts from './pages/Categories/CategoriesProducts.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: '/product/:prodId',
         element: <ProductDetails />
+      },
+      {
+        path: '/categories/:category',
+        element: <CategoriesProducts />
       },
       {
         path: "/cart",

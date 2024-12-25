@@ -11,12 +11,14 @@ import CheckoutFooter from '../../../components/Checkout/CheckoutFooter'
 import axios from 'axios';
 import AuthContext from '../../../Context/AuthProvider'
 import { API_ENDPOINT } from '../../../apiClient/apiEndPoint'
+import { useNavigate } from 'react-router-dom'
 
 const CheckoutPage = () => {
 
     const { addresses, loading, error, triggerRefetch } = useFetchAddress();
     const[toggle, setToggle] = useState(false);
     const { getToken } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleToggle = () => {
         setToggle(!toggle);
@@ -54,7 +56,10 @@ const CheckoutPage = () => {
                 <CiLock className='text-xl custom3:text-2xl sm:text-3xl'/>
                 </div>
                 <div>
-                <FaCartArrowDown className= 'text-2xl custom3:text-3xl sm:text-4xl text-slate-800'/>
+                <FaCartArrowDown 
+                className= 'text-2xl custom3:text-3xl sm:text-4xl text-slate-800 cursor-pointer'
+                onClick={()=>{navigate('/cart')}}
+                />
                 </div>
             </div>
             <div className='flex flex-col md:flex-row p-6'>

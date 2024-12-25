@@ -17,7 +17,8 @@ export const API_ENDPOINT = {
         add_new_address: `${BASEURL}/api/v1/address`,
     },
     PATCH: {
-        update_quantity: `${BASEURL}/api/v1/cart`
+        update_quantity: `${BASEURL}/api/v1/cart`,
+        update_address: `${BASEURL}/api/v1/address`
     },
     DELETE:{
         delete_cart_product: `${BASEURL}/api/v1/cart`,
