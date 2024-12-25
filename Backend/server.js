@@ -8,6 +8,7 @@ import userRoutes from "./routes/userRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import wishListRoutes from "./routes/wishListRoutes.js";
 import addressRoute from "./routes/addressRoute.js";
+import orderRoute from './routes/orderRoute.js'
 import authRoutes from "./routes/authRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
@@ -32,7 +33,9 @@ app.use("/api/v1/product", productsRoutes);
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/wishlist", wishListRoutes);
 app.use("/api/v1/address", addressRoute);
+app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/auth", authRoutes);
+
 app.use(notFound);
 app.use(errorHandler);
 

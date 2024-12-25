@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AddressForm from '../../../components/Checkout/AddressForm'
 import PaymentMethodSelector from '../../../components/Checkout/PaymentMethodSelector'
 import OrderSummary from '../../../components/Checkout/OrderSummary'
@@ -19,6 +19,10 @@ const CheckoutPage = () => {
     const[toggle, setToggle] = useState(false);
     const { getToken } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0, 0); 
+    }, []);
 
     const handleToggle = () => {
         setToggle(!toggle);
