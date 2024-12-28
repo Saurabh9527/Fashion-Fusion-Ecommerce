@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import Body from './pages/Body/Body.jsx';
 import Login from './pages/Login/Login.jsx';
+import Register from './pages/Register/Register.jsx';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
 import ProductDetails from './pages/ProductDetails/ProductDetails.jsx';
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
@@ -18,6 +20,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CheckoutPage from './pages/ProtectedRoutes/Checkout/CheckoutPage.jsx';
 import CategoriesProducts from './pages/Categories/CategoriesProducts.jsx';
+import Profile from './pages/ProtectedRoutes/Profile/Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -48,11 +51,27 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/profile",
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
     ]
   },
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/updatepassword",
+    element: <ForgotPassword />,
   },
   {
     path: "/checkout",

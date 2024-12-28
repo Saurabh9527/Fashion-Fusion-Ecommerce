@@ -25,7 +25,7 @@ const Navbar = () => {
   }
 
   const handleProfile = () => {
-    console.log("My Profile Clicked");
+    navigate('/profile');
   }
 
   const handleLoginSignup = () => {
