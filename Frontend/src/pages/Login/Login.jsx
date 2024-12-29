@@ -6,7 +6,7 @@ const Login = () => {
       <form className="max-w-sm mx-auto mt-10 border border-gray-200 shadow-sm rounded-lg p-4">
         <h2 className='text-3xl font-roboto'>Sign in</h2>
         <div className="mb-5 mt-5">
-          <label for="email" className="block mb-2 text-sm font-medium font-roboto">Your email</label>
+          <label htmlFor="email" className="block mb-2 text-sm font-medium font-roboto">Your email</label>
           <input
             type="email"
             id="email"
@@ -15,7 +15,7 @@ const Login = () => {
             required />
         </div>
         <div className="mb-5">
-          <label for="password" className="block mb-2 text-sm font-medium font-roboto">Your password</label>
+          <label htmlFor="password" className="block mb-2 text-sm font-medium font-roboto">Your password</label>
           <input
             type="password"
             id="password"
@@ -33,21 +33,20 @@ const Login = () => {
             />
           </div>
           <label
-            for="terms"
+            htmlFor="terms"
             className="ms-2 text-sm font-medium">I agree with the <a href="#" className="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>
           </label>
         </div>
         <button
           type="submit"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full mb-2">Sign in
-          </button>
-          <div className='text-end mb-5 text-blue-600 hover:underline cursor-pointer text-sm font-medium'>Forgot password</div>
-        <div className='mb-5'>
-          <div className='flex justify-between items-center'>
-            <div className=' border border-gray-300 w-[30%]'></div>
-            <div className='text-sm text-customGray'>New to Fashionfusion?</div>
-            <div className=' border border-gray-300 w-[30%]'></div>
-          </div>
+        </button>
+        <div className='text-end mb-5 text-blue-600 hover:underline cursor-pointer text-sm font-medium'>Forgot password</div>
+
+        <div className="flex items-center space-x-1 mb-5">
+          <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
+          <p className="px-3 text-sm dark:text-gray-600">New to Fashionfusion?</p>
+          <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
         </div>
 
         <div>

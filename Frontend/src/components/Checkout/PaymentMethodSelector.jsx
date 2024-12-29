@@ -69,7 +69,8 @@ const PaymentMethodSelector = () => {
                   className='border rounded-lg p-1 outline-none shadow  bg-gray-50'
                   defaultValue=""
                   >
-                    <option value="" disabled className='font-roboto'>
+                    <option selected 
+                    className='font-roboto'>
                       Choose an Option
                     </option>
                     {banks.map((bank) => (

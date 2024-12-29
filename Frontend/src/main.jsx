@@ -21,6 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import CheckoutPage from './pages/ProtectedRoutes/Checkout/CheckoutPage.jsx';
 import CategoriesProducts from './pages/Categories/CategoriesProducts.jsx';
 import Profile from './pages/ProtectedRoutes/Profile/Profile.jsx';
+import OtpVerification from './pages/OtpVerification/OtpVerification.jsx';
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
   {
     path: "/updatepassword",
     element: <ForgotPassword />,
+  },
+  {
+    path: "/verify",
+    element: <OtpVerification />,
   },
   {
     path: "/checkout",
