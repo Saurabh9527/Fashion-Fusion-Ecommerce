@@ -7,25 +7,65 @@ import Otp from "../models/otpModel.js";
 import { transporter } from "../utils/nodeMailer.js";
 
 export const signup = asyncHandler(async (req, res) => {
-  const { name, email, password, mobile } = req.body;
+  const { email, password, confirmPassword } = req.body;
+  
 
-  if (!name || !email || !password || !mobile) {
+  if ( !email || !password || !confirmPassword ) {
     res.status(400);
     throw new Error("Please Enter all the fields");
   }
 
+  if (password !== confirmPassword) {
+    res.status(400);
+    throw new Error("Passwords do not match");
+  }
+
   try {
     const userExist = await User.findOne({ email });
-    if (userExist) {
-      res.status(400);
-      throw new Error("User already exists");
-    }
+    if (userExist) {    
+      if (userExist.verifyStatus === "verified") { 
+        return res.status(400).json({
+          success: false,
+          message: "User already exists",
+        });
+      } else {
+        // User exists but is not verified, resend OTP 
+        const otp = otpGenerator.generate(6, {
+          digits: true,
+          upperCaseAlphabets: false,
+          lowerCaseAlphabets: false,
+          specialChars: false,
+        });
+        const newOtp = new Otp({ email, otp });
+        await newOtp.save();
 
+        res.status(200).json({
+          success: true,
+          message: "OTP resent successfully",
+        });
+
+        const mailOptions = {
+          from: "jdean4193@gmail.com",
+          to: `${email}`,
+          subject: "Your OTP Code",
+          text: `Your OTP code is ${otp}`,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.error("Error sending OTP email:", error);
+          } else {
+            console.log("OTP email sent:", info.response);
+          }
+        });
+
+        return;
+      }
+    }
+    
     const newUser = new User({
-      name,
       email,
       password,
-      mobile,
     });
 
     const savedUser = await newUser.save();
@@ -37,10 +77,11 @@ export const signup = asyncHandler(async (req, res) => {
     });
     const newOtp = new Otp({ email, otp });
     await newOtp.save();
+
     res.status(200).json({
-        success: true,
-        message: "OTP sent successfully",
-      });
+      success: true,
+      message: "OTP sent successfully",
+    });
 
     const mailOptions = {
       from: "jdean4193@gmail.com",
@@ -51,13 +92,13 @@ export const signup = asyncHandler(async (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.error('Error sending OTP email:', error);
+        console.error("Error sending OTP email:", error);
         // Optionally, you can handle the error (e.g., retry sending the email)
       } else {
-        console.log('OTP email sent:', info.response);
+        console.log("OTP email sent:");
+       // console.log("OTP email sent:", info.response);
       }
     });
-
   } catch (error) {
     res.status(500);
     throw new Error("failed to create the User");
@@ -172,3 +213,5 @@ export const login = asyncHandler(async (req, res) => {
 //TODO export const forgotPassword = asyncHandler ( async ( req, res ) => {
 
 // })
+
+//TODO export const resetPassword = asyncHandler ( async ( req, res ) => {

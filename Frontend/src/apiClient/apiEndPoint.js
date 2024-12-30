@@ -15,6 +15,9 @@ export const API_ENDPOINT = {
         add_to_cart: `${BASEURL}/api/v1/cart`,
         add_to_wishlist: `${BASEURL}/api/v1/wishlist`,
         add_new_address: `${BASEURL}/api/v1/address`,
+        signup: `${BASEURL}/api/v1/user`,
+        verify_otp: `${BASEURL}/api/v1/otp`,
+        resent_otp: `${BASEURL}/api/v1/otp`
     },
     PATCH: {
         update_quantity: `${BASEURL}/api/v1/cart`,

@@ -8,6 +8,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState('');
 
 //TODO write two function here setToken and remove token and pass as argument via this context and use in login and  in logout function in our componenet
 
@@ -55,7 +56,7 @@ const removeToken = () => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, setToken, getToken, removeToken }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, setToken, getToken, removeToken, userEmail, setUserEmail }}>
       {children}
     </AuthContext.Provider>
   );
