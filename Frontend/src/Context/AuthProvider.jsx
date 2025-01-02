@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userEmail, setUserEmail] = useState('');
 
-//TODO write two function here setToken and remove token and pass as argument via this context and use in login and  in logout function in our componenet
 
 const setToken = (token) => {
   localStorage.setItem("jwtToken", token);

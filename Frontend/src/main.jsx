@@ -22,6 +22,10 @@ import CheckoutPage from './pages/ProtectedRoutes/Checkout/CheckoutPage.jsx';
 import CategoriesProducts from './pages/Categories/CategoriesProducts.jsx';
 import Profile from './pages/ProtectedRoutes/Profile/Profile.jsx';
 import OtpVerification from './pages/OtpVerification/OtpVerification.jsx';
+import Contact from './pages/Contact/Contact.jsx';
+import TermsCondition from './pages/TermsConditions/TermsCondition.jsx';
+import Faq from './pages/FAQ/Faq.jsx';
+import Wishlist from './pages/ProtectedRoutes/Wishlist/Wishlist.jsx';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +57,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/wishlist",
+        element: (
+          <ProtectedRoute>
+            <Wishlist />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "/profile",
         element: (
           <ProtectedRoute>
@@ -60,6 +72,18 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: '/contact',
+        element: <Contact />
+      },
+      {
+        path: '/terms-conditions',
+        element: <TermsCondition />
+      },
+      {
+        path: '/faq',
+        element: <Faq />
+      }
     ]
   },
   {
@@ -75,7 +99,7 @@ const router = createBrowserRouter([
     element: <ForgotPassword />,
   },
   {
-    path: "/verify",
+    path: "/verify-otp",
     element: <OtpVerification />,
   },
   {

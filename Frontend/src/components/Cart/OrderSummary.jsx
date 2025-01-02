@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const OrderSummary = ({ products }) => {
 
     const totalPrice = products.reduce(
-        (acc, product) => acc + (Number(product.productId.price) || 0) * (Number(product.quantity) || 0),
+        (acc, product) => acc + (Number(product?.productId?.price) || 0) * (Number(product?.quantity) || 0),
         0
     );
 

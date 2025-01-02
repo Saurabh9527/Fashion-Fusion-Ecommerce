@@ -41,7 +41,7 @@ export const signup = asyncHandler(async (req, res) => {
 
         res.status(200).json({
           success: true,
-          message: "OTP resent successfully",
+          message: "OTP sent successfully",
         });
 
         const mailOptions = {

@@ -1,9 +1,11 @@
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { RiErrorWarningFill } from "react-icons/ri";
 import axios from 'axios';
 import AuthContext from '../../Context/AuthProvider';
 import { API_ENDPOINT } from '../../apiClient/apiEndPoint';
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router";
 
 const Register = () => {
 
@@ -14,6 +16,14 @@ const Register = () => {
   const [isTermsChecked, setIsTermsChecked] = useState(false);
   const [loading, setLoading] = useState(false)
   const { setUserEmail } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedEmail = sessionStorage.getItem('email');
+    if (savedEmail) {
+      setEmail(savedEmail);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,20 +53,37 @@ const Register = () => {
       try {
         setLoading(true);
         const config = {
+          withCredentials: true,
           headers: {
             'Content-Type': 'application/json'
           }
-        }
-        const response = await axios.post(`${API_ENDPOINT.POST.signup}/signup`, {
+        };
+
+        const { data } = await axios.post(`${API_ENDPOINT.POST.signup}/signup`, {
           email,
           password,
           confirmPassword
         }, config);
 
-        console.log(response);
+        if(data.success) {
+          sessionStorage.setItem('email', email);
+          setUserEmail(email);
+          toast.success(data.message);
+          setEmail('')
+          setPassword('')
+          setConfirmPassword('')
+          navigate('/verify-otp');
+        }else {
+          toast.error(data.message);
+        }
 
       } catch (error) {
-        console.log(error);
+        console.error('Error submitting form:', error);
+        if (error.response && error.response.data && error.response.data.message) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error('An error occurred. Please try again.');
+        }
       } finally {
         setLoading(false);
       }
@@ -74,6 +101,7 @@ const Register = () => {
           <label htmlFor="email" className="block mb-2 text-sm font-medium font-roboto">Your email</label>
           <input
             type="email"
+            value={email}
             id="email"
             className="shadow-inner  border border-gray-300   block w-full p-2.5 rounded-lg outline-none"
             placeholder="name@fashionfusion.com"

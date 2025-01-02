@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import logo from '../../assets/Logo.jpg';
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaCartArrowDown } from "react-icons/fa6";
@@ -6,11 +6,13 @@ import { FaHeart } from "react-icons/fa6";
 import triangleLogo from '../../assets/Group.png'
 import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../../Context/AuthProvider';
 
 const Navbar = () => {
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
+  const { removeToken } = useContext(AuthContext)
 
   const handleMouseEnter = () => {
     setIsProfileOpen(true);
@@ -29,7 +31,8 @@ const Navbar = () => {
   }
 
   const handleLoginSignup = () => {
-    console.log("Login Signup Clicked");
+    removeToken();
+    navigate('/login');
   }
 
   // const handleCart = () => {
@@ -37,7 +40,7 @@ const Navbar = () => {
   // }
 
   const handleWishList = () => {
-    console.log("Wishlish Clicked");
+    navigate('/wishlist');
   }
 
   return (

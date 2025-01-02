@@ -16,6 +16,7 @@ export default {
         'custom': '905px', 
         'custom2': '805px',
         'custom3': '520px',
+        'custom4': '705px',
       },
     },
   },

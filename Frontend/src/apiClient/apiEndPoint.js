@@ -8,16 +8,19 @@ export const API_ENDPOINT = {
         get_product_details: `${BASEURL}/api/v1/product`,
         get_similar_products: `${BASEURL}/api/v1/product/getSimillarProduct`,
         get_cart_products: `${BASEURL}/api/v1/cart`,
+        get_wishlist_products: `${BASEURL}/api/v1/wishlist`,
         get_addresses: `${BASEURL}/api/v1/address`,
     },
     POST:{
         get_auth: `${BASEURL}/api/v1/auth/validate`,
+        signup: `${BASEURL}/api/v1/user`,
+        login: `${BASEURL}/api/v1/user`,
+        verify_otp: `${BASEURL}/api/v1/otp`,
+        resent_otp: `${BASEURL}/api/v1/otp`,
         add_to_cart: `${BASEURL}/api/v1/cart`,
         add_to_wishlist: `${BASEURL}/api/v1/wishlist`,
         add_new_address: `${BASEURL}/api/v1/address`,
-        signup: `${BASEURL}/api/v1/user`,
-        verify_otp: `${BASEURL}/api/v1/otp`,
-        resent_otp: `${BASEURL}/api/v1/otp`
+        remove_from_wishList_addTo_cart: `${BASEURL}/api/v1/wishlist`
     },
     PATCH: {
         update_quantity: `${BASEURL}/api/v1/cart`,
@@ -25,6 +28,7 @@ export const API_ENDPOINT = {
     },
     DELETE:{
         delete_cart_product: `${BASEURL}/api/v1/cart`,
+        delete_wishlist_product: `${BASEURL}/api/v1/wishlist`,    
         delete_address: `${BASEURL}/api/v1/address`
     }
 }

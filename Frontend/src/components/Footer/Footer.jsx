@@ -44,13 +44,13 @@ const Footer = () => {
 						<Link to={''}>Sitemap</Link>
 					</li>
 					<li>
-						<Link to={``}>FAQ</Link>
+						<Link to={`/faq`}>FAQ</Link>
 					</li>
 					<li>
 						<Link to={``}>About Us</Link>
 					</li>
 					<li>
-						<Link to={``}>Terms & Conditions</Link>
+						<Link to={`/terms-conditions`}>Terms & Conditions</Link>
 					</li>
 				</ul>
 			</div>
@@ -58,7 +58,7 @@ const Footer = () => {
 				<h3 className="uppercase dark:text-gray-900 font-medium">CUSTOMER SERVICES</h3>
 				<ul className="space-y-1">
 					<li>
-						<Link to={``}>Contact Us</Link>
+						<Link to={`/contact`}>Contact Us</Link>
 					</li>
 					<li>
 						<Link to={``}>Track Your Order</Link>

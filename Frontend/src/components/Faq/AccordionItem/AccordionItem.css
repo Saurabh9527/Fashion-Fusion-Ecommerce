@@ -1,0 +1,11 @@
+
+/* Add this CSS to your main stylesheet or within a CSS module */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  
+  .accordion-content.open {
+    max-height: 500px; /* Adjust the max-height as needed */
+  }

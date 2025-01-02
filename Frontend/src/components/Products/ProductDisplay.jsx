@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductDescription from './ProductDescription';
 import ProductOffers from './ProductOffers/ProductOffers';
 import useSimillarProducts from '../../hooks/useSimillarProducts';
@@ -19,6 +19,10 @@ const ProductDisplay = ({ product }) => {
   const handleHomeNavigation = () => {
       navigate('/home')
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
 
   return (
     <div className='flex flex-col ml-2 mr-2 sm:ml-5 sm:mr-5 lg:max-w-[1000px] xl:max-w-[1200px] lg:mx-auto pt-8 mb-10'>

@@ -50,7 +50,7 @@ const AddressForm = ({ addresses, handleToggle, toggle, handleDeleteAddress, tri
                                     </div>
                                     ) :(
                                         <div className="font-roboto mt-3 text-gray-500">
-                                        Loading your address
+                                        Add delivery address
                                       </div>
                                     )
                                 )

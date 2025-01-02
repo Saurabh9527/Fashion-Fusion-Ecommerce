@@ -23,13 +23,13 @@ const ProfileDashboard = () => {
                     <h4 className='mt-2 text-customGray text-base'>Edit address for orders and gifts</h4>
                 </div>
             </Link>
-            <Link to={'/orders'}>
+            <Link to={'/contact'}>
                 <div className='border p-4 rounded-md  border-gray-300 hover:bg-gray-100 h-[130px]'>
                     <h2 className='text-lg font-medium'>Contact Us</h2>
                     <h4 className='mt-2 text-customGray text-base'>Contact our customer service via email</h4>
                 </div>
             </Link>
-            <Link to={'/orders'}>
+            <Link to={'/terms-conditions'}>
                 <div className='border p-4 rounded-md  border-gray-300 hover:bg-gray-100 h-[130px]'>
                     <h2 className='text-lg font-medium'>Terms Of Use</h2>
                     <h4 className='mt-2 text-customGray text-base '>Review our terms and conditions for using our services.</h4>

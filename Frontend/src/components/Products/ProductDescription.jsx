@@ -78,8 +78,7 @@ const ProductDescription = ({ product }) => {
         toast.success("Product added successfully")
       }
       
-    } catch (error) {
-      
+    } catch (error) {    
       if(error.status===400 || error.status===401){
           toast.error("Something went wrong")
       }else{
@@ -88,9 +87,85 @@ const ProductDescription = ({ product }) => {
     } 
   }
 
-  const handleAddToWishlist = async () => {
+  const handleAddToWishlist = async ( prodId ) => {
+    const token = getToken();
+
+    if (!token ) { 
+      toast.info(
+       <div>
+         Please <span 
+           onClick={() => navigate("/login")} 
+           style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}>
+           Login
+         </span> to add the product to the wishlist.
+       </div>,
+       {
+         position: "top-center",
+         autoClose: true, // Keep the toast open until user interacts
+         closeOnClick: false,
+         hideProgressBar: false,
+         theme: "colored",
+       }
+     );
+       return;
+     }
+
+     if (!isAuthenticated) {
+      // Token exists but is invalid or expired
+      toast.info(
+        <div>
+          Your session has expired. Please{" "}
+          <span
+            onClick={() => navigate("/login")}
+            style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
+          >
+            Login
+          </span>{" "}
+          again.
+        </div>,
+        {
+          position: "top-center",
+          autoClose: true,
+          closeOnClick: false,
+          hideProgressBar: false,
+          theme: "colored",
+        }
+      );
+      return;
+    }
+
+    try {
+      const payload = {
+        productId: prodId,
+      };
+
+      const config = {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
+      };
+
+      const response = await axios.post(`${API_ENDPOINT.POST.add_to_wishlist}/addToWishList`, payload, config);
+      // console.log(response);
+       if(response.status === 200){
+         toast.success("Product added successfully")
+       }
+
+      
+    } catch (error) {
+      if(error.status===400 || error.status===401){
+        toast.error("Something went wrong")
+    }else{
+      console.log(error);
+      
+      toast.error("An unexpected error occurred");
+    }
+    }
 
   }
+  
 
   return (
     <div className='flex flex-col p-1 pl-3 pt-2'>
@@ -118,9 +193,13 @@ const ProductDescription = ({ product }) => {
         className='border px-12 py-3 rounded-md text-center text-base font-medium font-roboto bg-rose-500 hover:bg-red-600 text-white w-full'
         onClick={()=> handleAddToCart(product._id) }>ADD TO BAG</button>
         <button
-          className='border px-12 py-3 rounded-md text-center text-base font-medium font-sans flex items-center justify-center gap-1 hover:border-gray-400 w-full'>
+          className='border px-12 py-3 rounded-md text-center text-base font-medium font-sans flex items-center justify-center gap-1 hover:border-gray-400 w-full'
+          onClick={()=> handleAddToWishlist(product._id) }
+          >
           <CiHeart className='size-5' />
-          <span className='inline-flex items-center'>WISHLIST</span>
+          <span 
+          className='inline-flex items-center'
+          >WISHLIST</span>
         </button>
       </div>
     </div>
