@@ -107,13 +107,21 @@ export const signup = asyncHandler(async (req, res) => {
 
 export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  
   if (!email || !password) {
     res.status(400);
     throw new Error("Please Enter all the fields");
   }
 
   const user = await User.findOne({ email });
-  if (!user && !(await user.comparePassword(password))) {
+
+  if(!user){
+    res.status(400);
+    throw new Error("User not found")
+  }
+  const isMatch = await user.comparePassword(password);
+
+  if (!isMatch) {
     res.status(400);
     throw new Error("Invalid email or password");
   }
@@ -140,6 +148,34 @@ export const login = asyncHandler(async (req, res) => {
     throw new Error("failed to fetch the User");
   }
 });
+
+export const forgotPassword = asyncHandler(async (req, res) => {
+  const { email, password, confirmPassword } = req.body;
+
+  if (!email || !password || !confirmPassword) {
+    res.status(400);
+    throw new Error("Please Enter all the fields");
+  }
+
+  const user = await User.findOne({email})
+  if(!user){
+    res.status(400);
+    throw new Error("User not found")
+  }
+
+  if(password !== confirmPassword){
+    res.status(400);
+    throw new Error("Passwords do not match")
+  }
+
+  user.password = confirmPassword;
+  await user.save();
+  res.status(200).json({ 
+    success: true,
+    message: 'Password updated successfully' 
+  });
+
+})
 
 //export const signup = asyncHandler(async (req, res) => {
 //     const { name, email, password, mobile } = req.body;

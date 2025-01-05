@@ -1,15 +1,21 @@
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import useCartProduct from '../../../hooks/useCartProduct'
 import CartProduct from '../../../components/Cart/CartProduct';
 import OrderSummary from '../../../components/Cart/OrderSummary';
 import { useNavigate } from 'react-router-dom';
 import { GiShoppingCart } from "react-icons/gi";
 import { FaPersonWalkingArrowLoopLeft } from "react-icons/fa6";
+import AuthContext from '../../../Context/AuthProvider';
 
 const Cart = () => {
   const { products, loading, error, refetch } = useCartProduct();
   const navigate = useNavigate();
+  const { setCartProducts } = useContext(AuthContext);
+
+  useEffect(() => {
+    setCartProducts(products.length);
+  }, [products, setCartProducts]);
 
   const refreshCart = () => {
     refetch();

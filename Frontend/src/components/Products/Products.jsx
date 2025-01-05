@@ -40,7 +40,7 @@ const Products = () => {
 
   return (
     <div className='flex flex-col mt-[60px] max-w-[500px] md:max-w-[700px] lg:max-w-[900px] xl:max-w-[1000px] mx-auto border border-zinc-100 rounded mb-10'>
-      <div className='flex justify-between items-center p-2'>
+      <div className='relative flex justify-between items-center p-2'>
         {/* Categories */}
         <Categories handleCategoryChange={handleCategoryChange} />
 

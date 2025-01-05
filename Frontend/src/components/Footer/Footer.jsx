@@ -41,13 +41,10 @@ const Footer = () => {
 				<h3 className="tracking-wide uppercase dark:text-gray-900 font-medium">ABOUT US</h3>
 				<ul className="space-y-1">
 					<li>
-						<Link to={''}>Sitemap</Link>
-					</li>
-					<li>
 						<Link to={`/faq`}>FAQ</Link>
 					</li>
 					<li>
-						<Link to={``}>About Us</Link>
+						<Link to={`/about`}>About Us</Link>
 					</li>
 					<li>
 						<Link to={`/terms-conditions`}>Terms & Conditions</Link>

@@ -179,13 +179,17 @@ const Register = () => {
         }
         <button
           onClick={handleSubmit}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full mb-5">
+          className={`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full mb-5 ${loading ? 'cursor-wait' : 'cursor-pointer'}`}
+          disabled={loading}
+          >
           {loading ? 'Submitting...' : 'Verify your email id'}
         </button>
         <hr />
         <div className='text-sm font-medium text-customGray mt-5'>
           Already have an account?
-          <span className='ml-2 hover:underline cursor-pointer text-sky-600'>Sign in</span>
+          <span
+          onClick={() => navigate('/login')} 
+          className='ml-2 hover:underline cursor-pointer text-sky-600'>Sign in</span>
         </div>
       </form>
     </div>

@@ -63,7 +63,8 @@ const AddressForm = ({ addresses, handleToggle, toggle, handleDeleteAddress, tri
                                                 key={address?._id}
                                             >
                                                 <DisplayAddress 
-                                                address={address} handleSetDeliveryAddress={handleSetDeliveryAddress} handleDeleteAddress={handleDeleteAddress} triggerRefetch={triggerRefetch} />
+                                                address={address} handleSetDeliveryAddress={handleSetDeliveryAddress} handleDeleteAddress={handleDeleteAddress} triggerRefetch={triggerRefetch} 
+                                                />
                                             </div>
                                         ))}
                                     </div>

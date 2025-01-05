@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userEmail, setUserEmail] = useState('');
-
+  const [cartProducts, setCartProducts] = useState('');
 
 const setToken = (token) => {
   localStorage.setItem("jwtToken", token);
@@ -55,7 +55,7 @@ const removeToken = () => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, setToken, getToken, removeToken, userEmail, setUserEmail }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, setToken, getToken, removeToken, userEmail, setUserEmail, cartProducts, setCartProducts }}>
       {children}
     </AuthContext.Provider>
   );

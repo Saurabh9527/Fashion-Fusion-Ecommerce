@@ -15,6 +15,7 @@ export const API_ENDPOINT = {
         get_auth: `${BASEURL}/api/v1/auth/validate`,
         signup: `${BASEURL}/api/v1/user`,
         login: `${BASEURL}/api/v1/user`,
+        update_password: `${BASEURL}/api/v1/user`,
         verify_otp: `${BASEURL}/api/v1/otp`,
         resent_otp: `${BASEURL}/api/v1/otp`,
         add_to_cart: `${BASEURL}/api/v1/cart`,

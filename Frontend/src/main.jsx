@@ -26,6 +26,9 @@ import Contact from './pages/Contact/Contact.jsx';
 import TermsCondition from './pages/TermsConditions/TermsCondition.jsx';
 import Faq from './pages/FAQ/Faq.jsx';
 import Wishlist from './pages/ProtectedRoutes/Wishlist/Wishlist.jsx';
+import AboutUs from './pages/AboutUs/AboutUs.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy.jsx';
+import Address from './pages/ProtectedRoutes/Address/Address.jsx';
 
 const router = createBrowserRouter([
   {
@@ -73,6 +76,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/address",
+        element: (
+          <ProtectedRoute>
+            <Address />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '/contact',
         element: <Contact />
       },
@@ -83,6 +94,14 @@ const router = createBrowserRouter([
       {
         path: '/faq',
         element: <Faq />
+      },
+      {
+        path: '/about',
+        element: <AboutUs />
+      },
+      {
+        path: '/privacy',
+        element: <PrivacyPolicy />
       }
     ]
   },

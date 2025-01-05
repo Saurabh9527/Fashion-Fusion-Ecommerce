@@ -1,8 +1,12 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
 
 const ProfileDashboard = () => {
+        useEffect(() => {
+            window.scrollTo(0, 0);
+        }, []);
+
     return (
         <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 gap-y-8'>
             <Link to={'/orders'}>
@@ -17,7 +21,7 @@ const ProfileDashboard = () => {
                     <h4 className='mt-2 text-customGray text-base'>Edit login , name and mobile Number</h4>
                 </div>
             </Link>
-            <Link to={'/orders'}>
+            <Link to={'/address'}>
                 <div className='border p-4 rounded-md  border-gray-300 hover:bg-gray-100 h-[130px]'>
                     <h2 className='text-lg font-medium'>Your Addresses</h2>
                     <h4 className='mt-2 text-customGray text-base'>Edit address for orders and gifts</h4>
@@ -35,7 +39,7 @@ const ProfileDashboard = () => {
                     <h4 className='mt-2 text-customGray text-base '>Review our terms and conditions for using our services.</h4>
                 </div>
             </Link>
-            <Link to={'/orders'}>
+            <Link to={'/privacy'}>
                 <div className='border p-4 rounded-md  border-gray-300 hover:bg-gray-100 h-[130px]'>
                     <h2 className='text-lg font-medium'>Privacy Policy</h2>
                     <h4 

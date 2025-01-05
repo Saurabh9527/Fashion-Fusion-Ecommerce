@@ -12,7 +12,9 @@ const Navbar = () => {
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
-  const { removeToken } = useContext(AuthContext)
+  const { removeToken, cartProducts, getToken } = useContext(AuthContext)
+
+  const token = getToken();
 
   const handleMouseEnter = () => {
     setIsProfileOpen(true);
@@ -47,10 +49,10 @@ const Navbar = () => {
     <div>
       <div className="overflow-hidden pt-2">
         <div className="marquee whitespace-nowrap font-sans text-center text-slate-950 font-medium text-base flex gap-20">
-         <span> Made in India | Cash on Delivery Available | Free Shipping on Orders Over ₹1099 | 100% Genuine Products | Easy, Hassle-Free Returns | Secure Payments | Quality Assured | Exclusive Deals & Discounts Await!
-         </span>
-         <span> Limited Time Offer: 10% Off on Your First Purchase | Sign Up for Exclusive Member Benefits | Unbeatable Deals Just for You!
-         </span>
+          <span> Made in India | Cash on Delivery Available | Free Shipping on Orders Over ₹1099 | 100% Genuine Products | Easy, Hassle-Free Returns | Secure Payments | Quality Assured | Exclusive Deals & Discounts Await!
+          </span>
+          <span> Limited Time Offer: 10% Off on Your First Purchase | Sign Up for Exclusive Member Benefits | Unbeatable Deals Just for You!
+          </span>
         </div>
       </div>
       <div className='flex justify-between items-center w-full min-h-[80px] shadow-md pt-0 p-3'
@@ -90,7 +92,7 @@ const Navbar = () => {
                   className='block w-full text-left px-4 py-2 font-sans text-slate-700 hover:bg-slate-100 hover:text-slate-950'
                   onClick={handleLoginSignup}
                 >
-                  Sign Out
+                  {token ? 'Logout' : 'Login'}
                 </button>
               </div>
             )}
@@ -101,10 +103,11 @@ const Navbar = () => {
             <FaCartArrowDown
               aria-label='Cart'
               className='size-8 text-slate-800 hover:text-slate-900' />
-            <div className='absolute top-[-5px] right-[-10px] bg-red-500  text-white rounded-full w-5 h-5 flex items-center justify-center text-xs'
-            >
-              4
-            </div>
+            {token &&
+              <div className='absolute top-[-5px] right-[-10px] bg-red-500  text-white rounded-full w-5 h-5 flex items-center justify-center text-xs'
+              >
+                {cartProducts}
+              </div>}
           </Link>
           <div>
             <FaHeart
