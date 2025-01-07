@@ -6,7 +6,7 @@ export const addNewAddress = asyncHandler(async (req, res) => {
     const userId = req.user._id.toString();
 
     const { fullName, mobileNumber, pincode, address, landmark, city, state } = req.body;
-
+    
     if (!fullName || !mobileNumber || !pincode || !address || !landmark || !city || !state) {
         return res.status(400).json({ message: "All fields are required." });
     }

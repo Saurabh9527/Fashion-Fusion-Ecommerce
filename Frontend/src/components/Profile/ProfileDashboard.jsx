@@ -15,12 +15,6 @@ const ProfileDashboard = () => {
                     <h4 className='mt-2 text-customGray text-base'>Track, return or buy things again</h4>
                 </div>
             </Link>
-            <Link to={'/profileupdate'}>
-                <div className='border p-4 rounded-md  border-gray-300 hover:bg-gray-100 h-[130px]'>
-                    <h2 className='text-lg font-medium'>Login & Security</h2>
-                    <h4 className='mt-2 text-customGray text-base'>Edit login , name and mobile Number</h4>
-                </div>
-            </Link>
             <Link to={'/address'}>
                 <div className='border p-4 rounded-md  border-gray-300 hover:bg-gray-100 h-[130px]'>
                     <h2 className='text-lg font-medium'>Your Addresses</h2>
@@ -46,7 +40,7 @@ const ProfileDashboard = () => {
                     className='mt-2 text-customGray text-base text-ellipsis overflow-hidden whitespace-nowrap '>Learn how we collect, use, and protect your personal information.</h4>
                 </div>
             </Link>
-            <Link to={'/orders'}>
+            <Link to={''} className='cursor-not-allowed'>
                 <div className='border p-4 rounded-md  border-gray-300 hover:bg-gray-100 h-[130px]'>
                     <h2 className='text-lg font-medium'>Delete Account</h2>
                     <h4 className='mt-2 text-customGray text-base'>Permanently delete your account and associated data.</h4>

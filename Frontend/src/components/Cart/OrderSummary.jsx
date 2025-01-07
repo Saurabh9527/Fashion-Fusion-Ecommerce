@@ -1,8 +1,11 @@
 
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import AuthContext from '../../Context/AuthProvider';
 
 const OrderSummary = ({ products }) => {
+
+    const { setOrderDetails } = useContext(AuthContext);
 
     const totalPrice = products.reduce(
         (acc, product) => acc + (Number(product?.productId?.price) || 0) * (Number(product?.quantity) || 0),
@@ -15,6 +18,16 @@ const OrderSummary = ({ products }) => {
     const discount = totalPrice > 500 ? '₹20' : '₹0';
 
     const finalAmount = Number((totalPrice + (totalPrice < 400 ? 40 : 0) + (totalPrice > 500 ? 20 : 0)).toFixed(2));
+
+    useEffect(() => {
+        const orderDetails = {
+            totalPrice: roundedTotalPrice,
+            deliveryCharges,
+            discount,
+            finalAmount
+        };
+        setOrderDetails(orderDetails)
+    }, [products]);
 
     return (
         <div className='pl-4 pr-4 pt-4'>
