@@ -10,10 +10,12 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userEmail, setUserEmail] = useState('');
   const [cartProducts, setCartProducts] = useState('');
+
   const [orderDetails, setOrderDetails] = useState(() => {
     const savedOrderDetails = localStorage.getItem('orderDetails');
     return savedOrderDetails ? JSON.parse(savedOrderDetails) : {};
   });
+  
 
   useEffect(() => {
     localStorage.setItem('orderDetails', JSON.stringify(orderDetails));

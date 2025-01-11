@@ -29,6 +29,7 @@ import Wishlist from './pages/ProtectedRoutes/Wishlist/Wishlist.jsx';
 import AboutUs from './pages/AboutUs/AboutUs.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy.jsx';
 import Address from './pages/ProtectedRoutes/Address/Address.jsx';
+import Orders from './pages/Orders/Orders.jsx';
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Address />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/orders",
+        element: (
+          <ProtectedRoute>
+            <Orders />
           </ProtectedRoute>
         ),
       },

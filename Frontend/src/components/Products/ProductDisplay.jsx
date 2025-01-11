@@ -5,6 +5,7 @@ import ProductOffers from './ProductOffers/ProductOffers';
 import useSimillarProducts from '../../hooks/useSimillarProducts';
 import SimilarProducts from './SimilarProducts';
 import { useNavigate } from 'react-router-dom';
+import Reviews from '../Reviews/Reviews';
 
 const ProductDisplay = ({ product }) => {
 
@@ -60,6 +61,9 @@ const ProductDisplay = ({ product }) => {
       <hr className='h-[2px] bg-gray-50'/>
       <div className='mt-10 sm:ml-auto'>
         <ProductOffers />
+      </div>
+      <div className='mt-10 sm:ml-auto'>
+        <Reviews />
       </div>
       <div className='mt-20'>
         <h3 className='mb-3 font-semibold font-sans'>SIMILAR PRODUCTS</h3>

@@ -58,7 +58,7 @@ const Footer = () => {
 						<Link to={`/contact`}>Contact Us</Link>
 					</li>
 					<li>
-						<Link to={``}>Track Your Order</Link>
+						<Link to={`/orders`}>Track Your Order</Link>
 					</li>
 					<li>
 						<Link to={``}>Shipping and Returns</Link>

@@ -10,6 +10,8 @@ export const API_ENDPOINT = {
         get_cart_products: `${BASEURL}/api/v1/cart`,
         get_wishlist_products: `${BASEURL}/api/v1/wishlist`,
         get_addresses: `${BASEURL}/api/v1/address`,
+        get_orders: `${BASEURL}/api/v1/orders`,
+        get_reviews: `${BASEURL}/api/v1/review`
     },
     POST:{
         get_auth: `${BASEURL}/api/v1/auth/validate`,
