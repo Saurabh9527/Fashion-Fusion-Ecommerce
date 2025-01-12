@@ -9,6 +9,7 @@ const useFetchReview = ( productId ) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null);
     const { getToken } = useContext(AuthContext);
+    const [refresh, setRefresh] = useState(false);
 
     const fetchReviews = async() =>{
         const token = getToken();
@@ -32,16 +33,17 @@ const useFetchReview = ( productId ) => {
 
     useEffect(() => {
         fetchReviews();
-    }, [])
+    }, [refresh])
 
-    // const triggerRefetch = () => {
-    //     setRefresh(prev => !prev); // Toggle `refresh` state to trigger the effect
-    //   };
+    const triggerRefetch = () => {
+        setRefresh(prev => !prev); 
+      };
 
     return { 
         reviews, 
         loading, 
         error,
+        triggerRefetch
      };
 }
 

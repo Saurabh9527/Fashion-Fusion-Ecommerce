@@ -30,6 +30,7 @@ import AboutUs from './pages/AboutUs/AboutUs.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy.jsx';
 import Address from './pages/ProtectedRoutes/Address/Address.jsx';
 import Orders from './pages/Orders/Orders.jsx';
+import ReviewForm from './components/Reviews/ReviewForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Orders />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/create-review/:prodId",
+        element: (
+          <ProtectedRoute>
+            <ReviewForm />
           </ProtectedRoute>
         ),
       },

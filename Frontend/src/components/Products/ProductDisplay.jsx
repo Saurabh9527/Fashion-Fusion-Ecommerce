@@ -4,7 +4,7 @@ import ProductDescription from './ProductDescription';
 import ProductOffers from './ProductOffers/ProductOffers';
 import useSimillarProducts from '../../hooks/useSimillarProducts';
 import SimilarProducts from './SimilarProducts';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
 
 const ProductDisplay = ({ product }) => {
@@ -62,8 +62,22 @@ const ProductDisplay = ({ product }) => {
       <div className='mt-10 sm:ml-auto'>
         <ProductOffers />
       </div>
-      <div className='mt-10 sm:ml-auto'>
+      <hr className='mt-5'/>
+      <div className='mt-10 flex justify-end'>
+        <div className='w-1/2'>
+        <div className='flex flex-col'>
+        <h3 className='text-xl font-semibold mb-3 '>Review this product</h3>
+        <h4 className='text-gray-900 mb-4'>Share your thoughts with other customers</h4>
+        <div className='border border-gray-400 hover:bg-gray-50 w-fit py-2 text-center rounded-full mb-10'>
+        <Link
+        className='px-6' 
+        to={`/create-review/${product?._id}`}
+        >Write a product review
+        </Link>
+        </div>
+        </div>
         <Reviews />
+      </div>
       </div>
       <div className='mt-20'>
         <h3 className='mb-3 font-semibold font-sans'>SIMILAR PRODUCTS</h3>

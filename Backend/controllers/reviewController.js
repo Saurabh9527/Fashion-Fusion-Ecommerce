@@ -4,9 +4,9 @@ import Product from "../models/productsModel.js";
 
 export const addReview = asyncHandler(async (req, res) => {
   const userId = req.user._id.toString();
-  const { productId, name, rating, comment } = req.body;
+  const { productId, name, rating, comment, title } = req.body;
 
-  if (!userId || !productId || !name || !rating || !comment) {
+  if (!userId || !productId || !name || !rating || !comment || !title) {
     return res.status(400).json({ message: "All fields are required." });
   }
 
@@ -30,6 +30,7 @@ export const addReview = asyncHandler(async (req, res) => {
     userId,
     productId,
     name,
+    title,
     rating,
     comment,
   });
@@ -63,8 +64,9 @@ export const getReviews = asyncHandler(async (req, res) => {
 });
 
 export const deleteReview = asyncHandler(async (req, res) => {
+  
   const userId = req.user._id.toString();
-  const { reviewId } = req.body;
+  const { reviewId } = req.params;
 
   if (!reviewId) {
     return res.status(404).json({

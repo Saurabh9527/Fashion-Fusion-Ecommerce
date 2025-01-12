@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route('/:productId').get( getReviews );
 router.route('/addReview').post( jwtAuthMiddleware, addReview);
-router.route('/deleteReview').delete( jwtAuthMiddleware, deleteReview);
+router.route('/:reviewId').delete( jwtAuthMiddleware, deleteReview);
 // TODO: Create Edit Review Route
 
 export default router;
