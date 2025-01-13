@@ -28,12 +28,16 @@ export const API_ENDPOINT = {
     },
     PATCH: {
         update_quantity: `${BASEURL}/api/v1/cart`,
-        update_address: `${BASEURL}/api/v1/address`
+        update_address: `${BASEURL}/api/v1/address`,
     },
     DELETE:{
         delete_cart_product: `${BASEURL}/api/v1/cart`,
         delete_wishlist_product: `${BASEURL}/api/v1/wishlist`,    
         delete_address: `${BASEURL}/api/v1/address`,
         delete_review: `${BASEURL}/api/v1/review`
-    }
+    },
+    PUT: {
+        add_like: `${BASEURL}/api/v1/review`,
+        add_dislike: `${BASEURL}/api/v1/review`,
+    },
 }

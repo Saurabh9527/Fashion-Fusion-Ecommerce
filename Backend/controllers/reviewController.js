@@ -102,3 +102,68 @@ export const deleteReview = asyncHandler(async (req, res) => {
 // export const editReview = asyncHandler( async(req, res) => {
 
 // })
+
+export const addLikes = asyncHandler( async(req, res) => {
+  const userId = req.user._id.toString();
+  const { reviewId } = req.params;
+
+  const review = await Review.findById(reviewId);
+  if (!review) {
+    return res.status(404).json({
+      message: "Review not found.",
+      success: false,
+    });
+  }
+
+  if (review.likes.includes(userId)) {
+    review.likes = review.likes.filter((id) => id.toString() !== userId);
+    await review.save();
+    return res.status(200).json({
+      message: "Like removed successfully.",
+      success: true,
+      review: review
+    });
+  }else{
+    review.likes.push(userId);
+    review.disLikes = review.disLikes.filter((id) => id.toString() !== userId);
+    await review.save();
+    return res.status(200).json({
+      message: "Review liked successfully.",
+      success: true,
+      review: review
+    });
+  }
+
+});
+
+export const addDisLikes = asyncHandler(async(req, res)=>{
+  const userId = req.user._id.toString();
+  const { reviewId } = req.params;
+
+  const review = await Review.findById(reviewId);
+  if (!review) {
+    return res.status(404).json({
+      message: "Review not found.",
+      success: false,
+    });
+  }
+  if (review.disLikes.includes(userId)) {
+    review.disLikes = review.disLikes.filter((id) => id.toString() !== userId);
+    await review.save();
+    return res.status(200).json({
+      message: "Dislike removed successfully.",
+      success: true,
+      review: review
+    });
+  }else{
+    review.disLikes.push(userId);
+    review.likes = review.likes.filter((id) => id.toString() !== userId);
+    await review.save();
+    return res.status(200).json({
+      message: "Review disliked successfully.",
+      success: true,
+      review: review
+    });
+  }
+
+})

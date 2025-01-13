@@ -11,38 +11,93 @@ import AuthContext from '../../Context/AuthProvider';
 
 const DisplayReviews = ({ review, decodedToken, triggerRefetch }) => {
   const isOwner = decodedToken && decodedToken.id === review.userId;
-  
   const date = new Date(review?.updatedAt);
   const options = { day: 'numeric', month: 'long', year: 'numeric' };
   const formattedDate = new Intl.DateTimeFormat('en-GB', options).format(date);
   const [loading, setLoading] = useState(true);
   const { getToken } = useContext(AuthContext);
+  const token = getToken();
+  const like = review.likes.includes(decodedToken && decodedToken.id);
+  const dislike = review.disLikes.includes(decodedToken && decodedToken.id);
 
-  const handleDeleteReview = async () => {
+  const handleDeleteReview = async (reviewId) => {
     const token = getToken();
-        try {
-            setLoading(true);
-            const config = {
-              headers: {
-                  Authorization: `Bearer ${token}`, 
-                  "Content-Type": "application/json", 
-              },
-              withCredentials: true,
-          };
-          const reviewId = review?._id
-          
-          const { data } = await axios.delete(`${API_ENDPOINT.DELETE.delete_review}/${reviewId}`,
-            config
-          );      
-          if(data.success) {
-            toast.success(data?.message);
-            triggerRefetch();
-          }
-        } catch (error) {
-          toast.error(error?.response?.data?.message)
-        }finally{
-          setLoading(false);
-        }
+    try {
+      setLoading(true);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      };
+
+      const { data } = await axios.delete(`${API_ENDPOINT.DELETE.delete_review}/${reviewId}`,
+        config
+      );
+      if (data.success) {
+        toast.success(data?.message);
+        triggerRefetch();
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message)
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleLikes = async (reviewId) => {
+    const token = getToken();
+
+    try {
+      setLoading(true);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      };
+
+      const { data } = await axios.put(`${API_ENDPOINT.PUT.add_like}/${reviewId}/like`,
+        {},
+        config
+      );
+      if (data.success) {
+        triggerRefetch();
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message)
+    } finally {
+      setLoading(false);
+    }
+
+  }
+
+  const handleDisLikes = async (reviewId) => {
+    const token = getToken();
+    try {
+      setLoading(true);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      };
+
+      const { data } = await axios.put(`${API_ENDPOINT.PUT.add_dislike}/${reviewId}/disLike`,
+        {},
+        config
+      );
+      if (data.success) {
+        triggerRefetch();
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message)
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -62,7 +117,7 @@ const DisplayReviews = ({ review, decodedToken, triggerRefetch }) => {
           ))}
         </div>
         <div className='font-semibold mb-2'>
-          Good Quality
+          {review?.title}
         </div>
         <div className='mb-2'>
           <p className='font-roboto'>{review?.comment}</p>
@@ -70,20 +125,30 @@ const DisplayReviews = ({ review, decodedToken, triggerRefetch }) => {
         <div className='flex justify-between mb-1'>
           <div className='text-customGray font-medium'>{formattedDate}</div>
           <div className='flex items-center gap-x-11'>
+            {token &&
               <div className='flex items-center gap-x-1'>
-                <BiLike className='cursor-pointer' />
-                <span className='text-xs'>2</span>
+                <BiLike
+                  onClick={() => { handleLikes(review?._id) }}
+                  className={`cursor-pointer ${like ? 'fill-orange-700' : ''}`} 
+                />
+                <span className='text-xs'>{review?.likes.length === 0 ? '' : `${review?.likes.length}`}</span>
               </div>
+            }
+            {token &&
               <div className='flex items-center gap-x-1'>
-                <BiDislike className='cursor-pointer' />
-                <span className='text-xs'>2</span>
+                <BiDislike
+                  onClick={() => { handleDisLikes(review?._id) }}
+                  className={`cursor-pointer ${dislike ? 'fill-orange-700' : ''}`} 
+                  />
+                <span className='text-xs'>{review?.disLikes.length === 0 ? '' : `${review?.disLikes.length}`}</span>
               </div>
+            }
           </div>
         </div>
         <div>
-          <button 
-          className='text-sky-600 text-sm font-medium hover:underline'
-          onClick={handleDeleteReview}>{isOwner && 'Delete'}</button>
+          <button
+            className='text-sky-600 text-sm font-medium hover:underline'
+            onClick={() => { handleDeleteReview(review?._id) }}>{isOwner && 'Delete'}</button>
         </div>
       </div>
     </div>
