@@ -1,17 +1,20 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProductDescription from './ProductDescription';
 import ProductOffers from './ProductOffers/ProductOffers';
 import useSimillarProducts from '../../hooks/useSimillarProducts';
 import SimilarProducts from './SimilarProducts';
 import { Link, useNavigate } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
+import AuthContext from '../../Context/AuthProvider';
 
 const ProductDisplay = ({ product }) => {
 
   const {products, loading, error} =useSimillarProducts(product.category)
   const [index, setIndex] = useState(0);
   const navigate = useNavigate();
+  const { getToken } = useContext(AuthContext);
+  const token = getToken();
 
   const handleImageClick = () => {
     setIndex((prevIndex) => (prevIndex + 1) % product.images.length);
@@ -63,17 +66,30 @@ const ProductDisplay = ({ product }) => {
         <ProductOffers />
       </div>
       <hr className='mt-5'/>
-      <div className='mt-10 flex justify-end'>
-        <div className='w-1/2'>
+      <div className='mt-10 flex custom6:justify-end'>
+        <div className='ml-3 mr-3 w-full custom6:w-1/2 custom6:ml-0 custom6:mr-0'>
         <div className='flex flex-col'>
         <h3 className='text-xl font-semibold mb-3 '>Review this product</h3>
         <h4 className='text-gray-900 mb-4'>Share your thoughts with other customers</h4>
         <div className='border border-gray-400 hover:bg-gray-50 w-fit py-2 text-center rounded-full mb-10'>
-        <Link
-        className='px-6' 
-        to={`/create-review/${product?._id}`}
-        >Write a product review
-        </Link>
+          {
+            token ? 
+            (
+              <Link
+              className='px-6 font-medium' 
+              to={`/create-review/${product?._id}`}
+              >Write a product review
+              </Link>
+            )
+            :
+            (
+              <Link
+              className='px-6 font-medium' 
+              to={`/login`}
+              >Please login to add review
+              </Link>
+            )
+          }
         </div>
         </div>
         <Reviews />

@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import useOrders from '../../hooks/useOrders';
 import OrdersDisplay from '../../components/Orders/OrdersDisplay';
+import { Link } from 'react-router-dom';
 
 const Orders = () => {
     const { orders, loading,  error} = useOrders();
@@ -9,7 +10,12 @@ const Orders = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-    console.log(orders);
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { day: '2-digit', month: 'long', year: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+      };
     
 
     return (
@@ -24,19 +30,22 @@ const Orders = () => {
                             <div className='flex justify-between gap-8'>
                                 <div className='text-customGray font-medium'>
                                     <h2>ORDER PLACED</h2>
-                                    <p>25 November 2024</p>
+                                    <p>{formatDate(order.updatedAt)}</p>
                                 </div>
                                 <div className='text-customGray font-medium'>
                                     <h2>TOTAL</h2>
-                                    <p>₹907.00</p>
+                                    <p>₹{order.totalPrice}.00</p>
                                 </div>
                                 <div className='text-customGray font-medium'>
                                     SHIP TO
                                 </div>
                             </div>
-                            <div className='text-sky-700 hover:underline cursor-pointer'>
+                            <Link 
+                            to={`/order-details/${order._id}`} 
+                            className='text-sky-700 hover:underline cursor-pointer'
+                            >
                                 View order details
-                            </div>
+                            </Link>
                         </div>
                     </div>
                     <div  

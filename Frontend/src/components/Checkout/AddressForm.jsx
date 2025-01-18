@@ -1,25 +1,29 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
 import AddressModals from '../Modals/AddressModals';
 import DisplayAddress from './DisplayAddress';
 import { BsDashCircle } from "react-icons/bs";
 import { GoPlusCircle } from "react-icons/go";
+import AuthContext from '../../Context/AuthProvider';
 
 const AddressForm = ({ addresses, handleToggle, toggle, handleDeleteAddress, triggerRefetch }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [addressDelivered, setAddressDelivered] = useState(null);
+    const { setDeliveryAddress } = useContext(AuthContext);
 
     useEffect(() => {
         if (addresses?.length > 0) {
             setAddressDelivered(addresses[0]);
+            setDeliveryAddress(addresses[0]);
         }
     }, [addresses]);
 
     const handleSetDeliveryAddress = (addressId) => {
         const address = addresses.find((address) => address._id === addressId);
         setAddressDelivered(address);
+        setDeliveryAddress(address);
     }
 
     const handleAddNewAddress = () => {
@@ -64,7 +68,7 @@ const AddressForm = ({ addresses, handleToggle, toggle, handleDeleteAddress, tri
                                             >
                                                 <DisplayAddress 
                                                 address={address} handleSetDeliveryAddress={handleSetDeliveryAddress} handleDeleteAddress={handleDeleteAddress} triggerRefetch={triggerRefetch} 
-                                                />
+                                                addressDelivered={addressDelivered} />
                                             </div>
                                         ))}
                                     </div>

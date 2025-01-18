@@ -14,7 +14,7 @@ const Cart = () => {
   const { setCartProducts } = useContext(AuthContext);
 
   useEffect(() => {
-    setCartProducts(products.length);
+    setCartProducts(products);
   }, [products, setCartProducts]);
 
   const refreshCart = () => {

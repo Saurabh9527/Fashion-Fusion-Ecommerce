@@ -11,7 +11,8 @@ export const API_ENDPOINT = {
         get_wishlist_products: `${BASEURL}/api/v1/wishlist`,
         get_addresses: `${BASEURL}/api/v1/address`,
         get_orders: `${BASEURL}/api/v1/orders`,
-        get_reviews: `${BASEURL}/api/v1/review`
+        get_reviews: `${BASEURL}/api/v1/review`,
+        get_order_details: `${BASEURL}/api/v1/orders`,
     },
     POST:{
         get_auth: `${BASEURL}/api/v1/auth/validate`,
@@ -25,6 +26,8 @@ export const API_ENDPOINT = {
         add_new_address: `${BASEURL}/api/v1/address`,
         remove_from_wishList_addTo_cart: `${BASEURL}/api/v1/wishlist`,
         post_reviews: `${BASEURL}/api/v1/review`,
+        create_order: `${BASEURL}/api/v1/orders`,
+        verify_order: `${BASEURL}/api/v1/orders`,
     },
     PATCH: {
         update_quantity: `${BASEURL}/api/v1/cart`,

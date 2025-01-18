@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import AddressModals from '../Modals/AddressModals';
 import EditAddressModal from '../Modals/EditAddressModal';
 
-const DisplayAddress = ({ address, handleSetDeliveryAddress, handleDeleteAddress, triggerRefetch }) => {
+const DisplayAddress = ({ address, handleSetDeliveryAddress, handleDeleteAddress, triggerRefetch, addressDelivered }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -33,7 +33,7 @@ const DisplayAddress = ({ address, handleSetDeliveryAddress, handleDeleteAddress
                     id={address._id}
                     name="selectedAddress"
                     value={address._id}
-                    // checked={selectedAddress === address._id}
+                    checked={addressDelivered._id === address._id}
                     onChange={() => handleAddressSelect(address._id)}
                 />
                 <div className='flex flex-col'>

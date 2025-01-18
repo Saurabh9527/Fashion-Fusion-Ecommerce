@@ -28,9 +28,19 @@ const OrderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    address: {
-      type: String,
-      required: true,
+    deliveryAddress: {
+      fullName: { type: String, required: true },
+      mobileNumber: { type: String, required: true },
+      address: { type: String, required: true },
+      city: { type: String, required: true },
+      state: { type: String, required: true },
+      pincode: { type: String, required: true },
+    },
+    payment: {
+      razorpay_order_id: { type: String },
+      razorpay_payment_id: { type: String },
+      razorpay_signature: { type: String },
+      // status: { type: String, default: "Pending" }, // e.g., Pending, Paid, Failed
     },
   },
   { timestamps: true }

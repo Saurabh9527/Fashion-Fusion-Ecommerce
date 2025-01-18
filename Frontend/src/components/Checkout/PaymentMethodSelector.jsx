@@ -1,14 +1,17 @@
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { paymentOptions } from '../../utils/paymentIcons'
 import { banks } from '../../utils/netBankingBanks';
+import AuthContext from '../../Context/AuthProvider';
 
 const PaymentMethodSelector = () => {
 
   const [selectedMethod, setSelectedMethod] = useState("");
+  const { setPaymentMethod } = useContext(AuthContext);
 
   const handleSelection = (e) => {
     setSelectedMethod(e.target.value);
+    setPaymentMethod(e.target.value);
   }
 
   return (

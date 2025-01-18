@@ -1,3 +1,5 @@
+Payment Integration Document: https://www.devknus.com/course/tutorialreactminiprojects/reactminiprojects/11
+
 https://youtu.be/3omr6Zqzwt0?si=eq-3DnIJigL--8nL    -> job portal
 
 https://youtu.be/SUeVdpV768o?si=WT29A6zCF_yOd_8c    -> e-commerce

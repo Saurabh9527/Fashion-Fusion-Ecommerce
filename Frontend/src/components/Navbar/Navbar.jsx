@@ -106,7 +106,7 @@ const Navbar = () => {
             {token &&
               <div className='absolute top-[-5px] right-[-10px] bg-red-500  text-white rounded-full w-5 h-5 flex items-center justify-center text-xs'
               >
-                {cartProducts}
+                {cartProducts.length}
               </div>}
           </Link>
           <div>

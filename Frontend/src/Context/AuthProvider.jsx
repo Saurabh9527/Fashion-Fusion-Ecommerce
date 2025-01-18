@@ -9,17 +9,27 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userEmail, setUserEmail] = useState('');
-  const [cartProducts, setCartProducts] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   const [orderDetails, setOrderDetails] = useState(() => {
     const savedOrderDetails = localStorage.getItem('orderDetails');
     return savedOrderDetails ? JSON.parse(savedOrderDetails) : {};
+  });
+
+  const [cartProducts, setCartProducts] = useState(() => {
+    const storedCartProducts = sessionStorage.getItem("cartProducts");
+    return storedCartProducts ? JSON.parse(storedCartProducts) : [];
   });
   
 
   useEffect(() => {
     localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
   }, [orderDetails]);
+
+  useEffect(() => {
+    sessionStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+  }, [cartProducts]);
 
 const setToken = (token) => {
   localStorage.setItem("jwtToken", token);
@@ -65,7 +75,7 @@ const removeToken = () => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, setToken, getToken, removeToken, userEmail, setUserEmail, cartProducts, setCartProducts, orderDetails, setOrderDetails }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, setToken, getToken, removeToken, userEmail, setUserEmail, cartProducts, setCartProducts, orderDetails, setOrderDetails, deliveryAddress, setDeliveryAddress, paymentMethod, setPaymentMethod}}>
       {children}
     </AuthContext.Provider>
   );
