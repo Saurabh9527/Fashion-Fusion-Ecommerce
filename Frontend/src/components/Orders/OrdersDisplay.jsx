@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { MdOutlineAssignmentReturn } from "react-icons/md";
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 const   OrdersDisplay = ({order}) => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const   OrdersDisplay = ({order}) => {
     {order.products.map((product)=> (
           <div
           key={product._id} 
-          className='p-2 pt-4 pb-4 flex'
+          className='p-2 pt-4 pb-4 flex justify-around'
           >
           <img
           onClick={()=>{ navigate(`/product/${product?.productId?._id}`)}}
@@ -41,6 +41,10 @@ const   OrdersDisplay = ({order}) => {
           </button>
           </div>
           </div>
+          <Link to={`/product/${product?.productId?._id}`}
+          className='border border-gray-500 h-fit px-5 py-3 rounded-full hover:bg-gray-50'>
+            Write Product Review
+          </Link>
       </div>
     ))}
 

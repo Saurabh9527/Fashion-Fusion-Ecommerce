@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
 import Razorpay from "razorpay";
 import crypto from "crypto";
+import Cart from "../models/cartModel.js";
 
 const razorpayInstance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -45,6 +46,7 @@ export const fetchOrders = asyncHandler(async (req, res) => {
   }
 
   const orders = await Order.find({ userId })
+    .sort({ createdAt: -1 })
     .select('-payment') 
     .populate('products.productId', 'title thumbnail');
 
@@ -175,6 +177,25 @@ export const verifyRazorpayPayment = asyncHandler(async (req, res) => {
         },
       });
       await order.save();
+
+       const cart = await Cart.findOne({ userId });
+
+       if (cart) {
+         const remainingProducts = cart.products.filter(
+           (cartProduct) =>
+             !products.some(
+               (orderedProduct) =>
+                 orderedProduct.productId === cartProduct.productId.toString()
+             )
+         );
+ 
+         if (remainingProducts.length > 0) {
+           cart.products = remainingProducts;
+           await cart.save();
+         } else {
+           await Cart.deleteOne({ userId });
+         }
+       }
 
       return res.status(201).json({
         success: true,
