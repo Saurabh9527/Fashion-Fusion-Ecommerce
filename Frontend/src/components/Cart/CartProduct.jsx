@@ -26,8 +26,8 @@ const CartProduct = ({ product, onQuantityUpdate }) => {
         withCredentials: true,
     };
 
-    const { data } = await axios.patch(
-      `${API_ENDPOINT.PATCH.update_quantity}/${productId}`,
+    const { data } = await axios.put(
+      `${API_ENDPOINT.PUT.update_quantity}/${productId}`,
         { quantity: selectedQuantity },
         config
     );

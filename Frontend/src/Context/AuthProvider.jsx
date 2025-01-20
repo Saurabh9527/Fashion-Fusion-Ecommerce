@@ -21,15 +21,7 @@ export const AuthProvider = ({ children }) => {
     const storedCartProducts = sessionStorage.getItem("cartProducts");
     return storedCartProducts ? JSON.parse(storedCartProducts) : [];
   });
-  
 
-  useEffect(() => {
-    localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
-  }, [orderDetails]);
-
-  useEffect(() => {
-    sessionStorage.setItem('cartProducts', JSON.stringify(cartProducts));
-  }, [cartProducts]);
 
 const setToken = (token) => {
   localStorage.setItem("jwtToken", token);
@@ -73,6 +65,14 @@ const removeToken = () => {
           })
           .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+  }, [orderDetails]);
+
+  useEffect(() => {
+    sessionStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+  }, [cartProducts]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, setToken, getToken, removeToken, userEmail, setUserEmail, cartProducts, setCartProducts, orderDetails, setOrderDetails, deliveryAddress, setDeliveryAddress, paymentMethod, setPaymentMethod}}>

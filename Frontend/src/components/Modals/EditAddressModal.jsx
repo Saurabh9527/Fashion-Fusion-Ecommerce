@@ -40,7 +40,7 @@ const EditAddressModal = ({ handleCloseModal, address, triggerRefetch }) => {
             };
             try {
                 const { data } =
-                    await axios.patch(`${API_ENDPOINT.PATCH.update_address}/updateAddress/${address._id}`, formValues, config)
+                    await axios.put(`${API_ENDPOINT.PUT.update_address}/updateAddress/${address._id}`, formValues, config)
                 if (data.success) {
                     triggerRefetch();
                 }

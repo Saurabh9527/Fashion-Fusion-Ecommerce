@@ -67,9 +67,7 @@ export const fetchAllAddress = asyncHandler(async(req, res) => {
 });
 
 export const updateAddress = asyncHandler(async (req, res) =>{
-
-    console.log("i hitted fuck in bro");
-    
+  
     const userId = req.user._id.toString();
     const { addressId } = req.params;
 
@@ -84,15 +82,25 @@ export const updateAddress = asyncHandler(async (req, res) =>{
 
     const { fullName, mobileNumber, pincode, address, landmark, city, state } = req.body;
 
-    const updateData = {};
+    // const updateData = {};
 
-    if (fullName) updateData.fullName = fullName;
-    if (mobileNumber) updateData.mobileNumber = mobileNumber;
-    if (pincode) updateData.pincode = pincode;
-    if (address) updateData.address = address;
-    if (landmark) updateData.landmark = landmark;
-    if (city) updateData.city = city;
-    if (state) updateData.state = state;
+    // if (fullName) updateData.fullName = fullName;
+    // if (mobileNumber) updateData.mobileNumber = mobileNumber;
+    // if (pincode) updateData.pincode = pincode;
+    // if (address) updateData.address = address;
+    // if (landmark) updateData.landmark = landmark;
+    // if (city) updateData.city = city;
+    // if (state) updateData.state = state;
+
+    const updateData = {
+      fullName,
+      mobileNumber,
+      pincode,
+      address,
+      landmark,
+      city,
+      state,
+  };
 
     const updatedAddress = await Address.findByIdAndUpdate(addressId, updateData, { new: true });
 

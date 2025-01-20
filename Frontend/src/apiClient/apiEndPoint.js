@@ -30,8 +30,8 @@ export const API_ENDPOINT = {
         verify_order: `${BASEURL}/api/v1/orders`,
     },
     PATCH: {
-        update_quantity: `${BASEURL}/api/v1/cart`,
-        update_address: `${BASEURL}/api/v1/address`,
+        //update_quantity: `${BASEURL}/api/v1/cart`,
+        // update_address: `${BASEURL}/api/v1/address`,
     },
     DELETE:{
         delete_cart_product: `${BASEURL}/api/v1/cart`,
@@ -42,5 +42,7 @@ export const API_ENDPOINT = {
     PUT: {
         add_like: `${BASEURL}/api/v1/review`,
         add_dislike: `${BASEURL}/api/v1/review`,
+        update_quantity: `${BASEURL}/api/v1/cart`,
+        update_address: `${BASEURL}/api/v1/address`,
     },
 }

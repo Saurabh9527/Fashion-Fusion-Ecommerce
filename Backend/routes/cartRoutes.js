@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route('/').post( jwtAuthMiddleware, addToCart );
 router.route('/').get( jwtAuthMiddleware, fetchCartProducts);
-router.route('/:productId').patch( jwtAuthMiddleware, updateCartProduct);
+router.route('/:productId').put( jwtAuthMiddleware, updateCartProduct);
 router.route('/:productId').delete( jwtAuthMiddleware, deleteCartProduct);
 
 export default router;
