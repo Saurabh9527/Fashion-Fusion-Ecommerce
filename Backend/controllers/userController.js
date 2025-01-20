@@ -1,10 +1,14 @@
 import asyncHandler from "express-async-handler";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 import otpGenerator from "otp-generator";
 import User from "../models/userModel.js";
 import { generateToken } from "../config/jwt.js";
 import Otp from "../models/otpModel.js";
 import { transporter } from "../utils/nodeMailer.js";
+dotenv.config({
+  path: ".env",
+});
 
 export const signup = asyncHandler(async (req, res) => {
   const { email, password, confirmPassword } = req.body;
@@ -45,7 +49,7 @@ export const signup = asyncHandler(async (req, res) => {
         });
 
         const mailOptions = {
-          from: "jdean4193@gmail.com",
+          from: process.env.FROM_MAIL,
           to: `${email}`,
           subject: "Your OTP Code",
           text: `Your OTP code is ${otp}`,
@@ -84,7 +88,7 @@ export const signup = asyncHandler(async (req, res) => {
     });
 
     const mailOptions = {
-      from: "jdean4193@gmail.com",
+      from: process.env.FROM_MAIL,
       to: `${email}`,
       subject: "Your OTP Code",
       text: `Your OTP code is ${otp}`,

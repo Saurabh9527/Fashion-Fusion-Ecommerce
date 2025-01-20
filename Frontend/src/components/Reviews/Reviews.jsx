@@ -11,7 +11,7 @@ const Reviews = () => {
     const {reviews, loading, error, triggerRefetch} = useFetchReview(prodId)
     const token = localStorage.getItem('jwtToken');
     let decodedToken = null;
-
+    
     if(token){
         decodedToken = jwtDecode(token);
     }
@@ -19,7 +19,7 @@ const Reviews = () => {
   return (
     <div>
         {
-            reviews.map((review) => (
+             reviews.map((review) => (
                 <DisplayReviews key={review._id} review={review} decodedToken={decodedToken} triggerRefetch={triggerRefetch} />
             ))
         }

@@ -7,9 +7,11 @@ import triangleLogo from '../../assets/Group.png'
 import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../Context/AuthProvider';
+import useCartProduct from '../../hooks/useCartProduct';
 
 const Navbar = () => {
 
+  useCartProduct();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
   const { removeToken, cartProducts, getToken } = useContext(AuthContext)

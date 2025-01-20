@@ -1,5 +1,5 @@
 
-const items = [
+export const suggetionList = [
     { id: 1, name: "Modern Brown Dress for Girls" },
     { id: 2, name: "Men's Leather - Black jacket" },
     { id: 3, name: "Polka Dot Dress for Girls" },
