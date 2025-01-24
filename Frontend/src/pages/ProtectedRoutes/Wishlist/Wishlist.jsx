@@ -8,8 +8,9 @@ import { FaPersonWalkingArrowLoopLeft } from "react-icons/fa6";
 function Wishlist() {
 
   const { products, loading, error, refetch } = useWishlistProduct();
-   const navigate = useNavigate();
-
+  const navigate = useNavigate();
+  console.log(products);
+  
   if (error) {
     return <div>{error}</div>
   }
@@ -28,8 +29,9 @@ function Wishlist() {
 
   return (
     <div>
-      {products.length > 0
+      { products && products.length > 0
         ?
+        (
         <div className='flex flex-col ml-1 mr-1 custom3:ml-4 custom3:mr-4 sm:max-w-[610px] md:max-w-[680px] lg:max-w-[880px] mt-10 sm:mx-auto '>
           <span className='p-5 text-customGray text-sm pl-1 cursor-pointer'>
             <span onClick={handleHomeNavigation}>Home</span> /
@@ -42,6 +44,7 @@ function Wishlist() {
             </div>
           </div>
         </div>
+        )
         :
         (
           <div className='flex flex-col items-center mt-5'>

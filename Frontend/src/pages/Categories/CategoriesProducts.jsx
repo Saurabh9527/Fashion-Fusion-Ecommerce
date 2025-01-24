@@ -15,6 +15,10 @@ const CategoriesProducts = () => {
         setPageNo(1);
     }, [category]);
 
+    if(loading){
+        return <h2>Loading</h2>
+    }
+
     const handlePageChange = ( newPage ) =>{
         setPageNo(newPage)
     }

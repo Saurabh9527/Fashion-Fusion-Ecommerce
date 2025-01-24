@@ -7,5 +7,5 @@ const router = express.Router();
 router.route('/signup').post(signup);
 router.route('/login').post(login);
 router.route('/updatePassword').post(forgotPassword);
-
+// TODO: remove unverifid users after 24 hoursm use automation
 export default router;

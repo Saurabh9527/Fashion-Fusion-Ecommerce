@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { GiShoppingCart } from "react-icons/gi";
 import { FaPersonWalkingArrowLoopLeft } from "react-icons/fa6";
 import AuthContext from '../../../Context/AuthProvider';
+import CartShimmerUI from '../../../ShimmerUI/CartShimmerUI/CartShimmerUI';
 
 const Cart = () => {
   const { products, loading, error, refetch } = useCartProduct();
@@ -29,14 +30,17 @@ const Cart = () => {
     return <div>{error}</div>
   }
   if (loading) {
-    return <div>{console.log("i am loaded")}</div>
+    return <div className=' ml-2 mr-2 sm:min-w-[610px] md:min-w-[680px] lg:min-w-[880px] mt-10 sm:mx-auto'>
+      <CartShimmerUI/>
+      </div>
     // TODO show here shimme ui when qyantity update
   }
 
   return (
     <div>
-      {products.length > 0
+      { products && products.length > 0
         ?
+        (
         <div className='flex flex-col ml-1 mr-1 custom3:ml-4 custom3:mr-4 sm:max-w-[610px] md:max-w-[680px] lg:max-w-[880px] mt-10 sm:mx-auto '>
           <span className='p-5 text-customGray text-sm pl-1 cursor-pointer'>
             <span onClick={handleHomeNavigation}>Home</span> /
@@ -52,6 +56,7 @@ const Cart = () => {
             <OrderSummary products={products} />
           </div>
         </div>
+        )
         :
         (
           <div className='flex flex-col items-center mt-5'>

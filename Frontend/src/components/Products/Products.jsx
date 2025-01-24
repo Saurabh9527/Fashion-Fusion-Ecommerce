@@ -84,6 +84,7 @@ import Pagination from '../Pagination/Pagination';
 import Categories from './Categories';
 import { suggetionList } from '../../utils/suggetionsResult';
 import getHighlightText from '../../utils/getHighlightText.jsx';
+import ProductsShimmerUI from '../../ShimmerUI/ProductsShimmerUI/ProductsShimmerUI.jsx';
 
 const Products = () => {
   const [pageNo, setPageNo] = useState(1);
@@ -95,6 +96,10 @@ const Products = () => {
   const { products: paginatedProducts, loading: paginatedLoading, error: paginatedError, totalPages: paginatedTotalPages } = useFetchProducts(pageNo, 8, category);
   const { products: searchProducts, loading: searchLoading, error: searchError, totalPages: searchTotalPages } = useSearchProduct(search);
 
+
+  // if(paginatedLoading){
+  //   return <div><ProductsShimmerUI /></div>
+  // }
   const handleCategoryChange = (newCategory) => {
     setSearchQuery('')
     setSearch('')
@@ -138,7 +143,6 @@ const Products = () => {
 
   const displayProducts = search ? searchProducts : paginatedProducts;
   const totalPages = search ? searchTotalPages : paginatedTotalPages;
-  // console.log(displayProducts);
 
   return (
     <div className='flex flex-col mt-[60px] max-w-[500px] md:max-w-[700px] lg:max-w-[900px] xl:max-w-[1000px] mx-auto border border-zinc-100 rounded mb-10'>
@@ -175,13 +179,21 @@ const Products = () => {
       </div>
       <hr className='m-1' />
       <div className='p-2 mt-4'>
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-6' >
-          {
-            displayProducts.map((product) => (
-              <ProductItem key={product._id} product={product} />
-            ))
-          }
-        </div>
+        {
+          paginatedLoading ? (
+            <ProductsShimmerUI/>
+          )
+          : 
+          (
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-6' >
+            {
+              displayProducts.map((product) => (
+                <ProductItem key={product._id} product={product} />
+              ))
+            }
+          </div>
+          )
+        }
       </div>
 
       {/* Pagination */}

@@ -38,8 +38,8 @@ const removeToken = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
-
     if (!token) {
+      console.log("token not found");  
         setIsAuthenticated(false);
         setLoading(false);
         return;
@@ -54,8 +54,10 @@ const removeToken = () => {
       })
         .then((res) => {
           if (res.status === 200) {
+            console.log("token  found from backend");
             setIsAuthenticated(true);
           } else {
+            console.log("token not found from backend");
             setIsAuthenticated(false);
           }
         })
@@ -75,7 +77,24 @@ const removeToken = () => {
   }, [cartProducts]);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading, setToken, getToken, removeToken, userEmail, setUserEmail, cartProducts, setCartProducts, orderDetails, setOrderDetails, deliveryAddress, setDeliveryAddress, paymentMethod, setPaymentMethod}}>
+    <AuthContext.Provider value={{ 
+      isAuthenticated, 
+      setIsAuthenticated, 
+      loading, 
+      setToken, 
+      getToken, 
+      removeToken, 
+      userEmail, 
+      setUserEmail, 
+      cartProducts, 
+      setCartProducts, 
+      orderDetails, 
+      setOrderDetails, 
+      deliveryAddress, 
+      setDeliveryAddress, 
+      paymentMethod, 
+      setPaymentMethod
+      }}>
       {children}
     </AuthContext.Provider>
   );

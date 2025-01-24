@@ -12,7 +12,9 @@ const ProductItem = ({ product }) => {
         <div>
           <img 
           className="rounded-t-lg w-full h-[200px] sm:h-[250px] object-cover" 
-          src={product.thumbnail} alt="" />
+          src={product.thumbnail} 
+          alt={product.title} 
+          />
         </div>
 
         <div className="p-2 mb-4">
