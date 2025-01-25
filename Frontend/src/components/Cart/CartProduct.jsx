@@ -3,10 +3,12 @@ import React, { useContext, useState } from 'react'
 import AuthContext from '../../Context/AuthProvider';
 import axios from 'axios';
 import { API_ENDPOINT } from '../../apiClient/apiEndPoint';
+import '../Products/ProductItem/ProductItem.css'
 
 const CartProduct = ({ product, onQuantityUpdate }) => {
 
   const [loading, setLoading] = useState(true)
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { getToken } = useContext(AuthContext);
 
   const handleQuantityChange = async (e) => {
@@ -103,11 +105,20 @@ const CartProduct = ({ product, onQuantityUpdate }) => {
 
   return (
     <div className='flex space-x-4 '>
-      <div>
+      <div className='relative w-[180px] h-[180px]'>
+      {!imageLoaded && (
+            <div className="shimmer-wrapper">
+              <div className="shimmer"></div>
+            </div>
+        )}
         <img
           src={product?.productId?.thumbnail}
           alt={product?.productId?.title}
-          className='object-cover h-[180px] w-[180px] hover:border-2 p-1 border-gray-200 rounded-lg' />
+          className={`object-cover h-[180px] w-[180px] hover:border-2 p-1 border-gray-200 rounded-lg transition-opacity duration-500 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          onLoad={() => setImageLoaded(true)} 
+          />
       </div>
 
       <div className='flex flex-col'>

@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useFetchProducts from '../../hooks/useFetchProducts';
-import ProductItem from '../../components/Products/ProductItem';
 import Pagination from '../../components/Pagination/Pagination';
+import ProductItem from '../../components/Products/ProductItem/ProductItem';
 
 const CategoriesProducts = () => {
     const [pageNo, setPageNo] = useState(1);

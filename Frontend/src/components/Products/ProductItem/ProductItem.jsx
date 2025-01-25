@@ -1,19 +1,33 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { IoMdStar } from "react-icons/io";
+import './ProductItem.css'
 
 const ProductItem = ({ product }) => {
  //console.log(product.images);
   //TODO: create carousel for images 
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <Link to={`/product/${product._id}`}>
       <div className="max-w-sm bg-white border border-gray-50 rounded-md shadow-md ">
-        <div>
-          <img 
-          className="rounded-t-lg w-full h-[200px] sm:h-[250px] object-cover" 
-          src={product.thumbnail} 
-          alt={product.title} 
+
+      <div className="relative w-full h-[200px] sm:h-[250px]">
+          {/* Shimmer Effect */}
+          {!imageLoaded && (
+            <div className="shimmer-wrapper">
+              <div className="shimmer"></div>
+            </div>
+          )}
+
+          {/* Actual Image */}
+          <img
+            className={`rounded-t-lg w-full h-full object-cover transition-opacity duration-500 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            src={product.thumbnail}
+            alt={product.title}
+            onLoad={() => setImageLoaded(true)}
           />
         </div>
 

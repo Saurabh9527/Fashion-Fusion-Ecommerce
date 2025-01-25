@@ -1,6 +1,6 @@
 
 import React from 'react'
-import ProductItem from './ProductItem'
+import ProductItem from './ProductItem/ProductItem'
 
 const SimilarProducts = ( { products }) => {
   return (

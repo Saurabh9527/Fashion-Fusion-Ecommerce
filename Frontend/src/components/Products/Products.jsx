@@ -79,12 +79,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import useFetchProducts from '../../hooks/useFetchProducts';
 import useSearchProduct from '../../hooks/useSearchProduct';
-import ProductItem from './ProductItem';
 import Pagination from '../Pagination/Pagination';
 import Categories from './Categories';
 import { suggetionList } from '../../utils/suggetionsResult';
 import getHighlightText from '../../utils/getHighlightText.jsx';
 import ProductsShimmerUI from '../../ShimmerUI/ProductsShimmerUI/ProductsShimmerUI.jsx';
+import ProductItem from './ProductItem/ProductItem.jsx';
 
 const Products = () => {
   const [pageNo, setPageNo] = useState(1);
