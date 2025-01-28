@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import useFetchProducts from '../../hooks/useFetchProducts';
 import Pagination from '../../components/Pagination/Pagination';
 import ProductItem from '../../components/Products/ProductItem/ProductItem';
+import ProductsShimmerUI from '../../ShimmerUI/ProductsShimmerUI/ProductsShimmerUI';
+import CategoriesProductsShimmerUI from '../../ShimmerUI/CategoriesProductsShimmerUI/CategoriesProductsShimmerUI';
 
 const CategoriesProducts = () => {
     const [pageNo, setPageNo] = useState(1);
@@ -16,7 +18,7 @@ const CategoriesProducts = () => {
     }, [category]);
 
     if(loading){
-        return <h2>Loading</h2>
+        return <div><CategoriesProductsShimmerUI/></div>
     }
 
     const handlePageChange = ( newPage ) =>{

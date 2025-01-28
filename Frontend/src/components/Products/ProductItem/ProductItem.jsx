@@ -14,7 +14,7 @@ const ProductItem = ({ product }) => {
 
       <div className="relative w-full h-[200px] sm:h-[250px]">
           {/* Shimmer Effect */}
-          {!imageLoaded && (
+         {!imageLoaded && (
             <div className="shimmer-wrapper">
               <div className="shimmer"></div>
             </div>

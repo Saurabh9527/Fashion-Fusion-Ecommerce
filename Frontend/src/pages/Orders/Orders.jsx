@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import useOrders from '../../hooks/useOrders';
 import OrdersDisplay from '../../components/Orders/OrdersDisplay';
 import { Link } from 'react-router-dom';
+import OrderShimmerUI from '../../ShimmerUI/OrderShimmerUI/OrderShimmerUI';
 
 const Orders = () => {
     const { orders, loading,  error} = useOrders();
@@ -16,6 +17,10 @@ const Orders = () => {
         const options = { day: '2-digit', month: 'long', year: 'numeric' };
         return date.toLocaleDateString('en-US', options);
       };
+
+      if(loading){
+        return <div><OrderShimmerUI /></div>
+      }
     
 
     return (
