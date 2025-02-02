@@ -5,8 +5,8 @@ import asyncHandler from "express-async-handler";
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const validateToken = asyncHandler ( async( req, res) =>{
-    console.log("authentication  hit");
     const token = req.headers.authorization?.split(" ")[1];
+    console.log("validate route hit"); 
     console.log(token); 
 
     if(!token) {

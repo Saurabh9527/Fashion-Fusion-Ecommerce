@@ -1,7 +1,7 @@
 
 import React from 'react'
-import FollowSubscribeWidget from './FollowSubscribeWidget'
 import SubscribeNewsletter from './SubscribeNewsletter'
+import FollowSubscribeWidget from './FollowSubscribeWidget/FollowSubscribeWidget'
 
 const Promotions = () => {
   return (

@@ -15,7 +15,7 @@ export const API_ENDPOINT = {
         get_order_details: `${BASEURL}/api/v1/orders`,
     },
     POST:{
-        get_auth: `${BASEURL}/api/v1/auth/validate`,
+        get_auth: `${BASEURL}/api/v1/auth`,
         signup: `${BASEURL}/api/v1/user`,
         login: `${BASEURL}/api/v1/user`,
         update_password: `${BASEURL}/api/v1/user`,

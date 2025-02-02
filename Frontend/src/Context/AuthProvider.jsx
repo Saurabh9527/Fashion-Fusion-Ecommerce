@@ -24,11 +24,14 @@ export const AuthProvider = ({ children }) => {
 
 
 const setToken = (token) => {
+  console.log("Storing Token:", token);
   localStorage.setItem("jwtToken", token);
 };
 
 const getToken = () => {
-  return localStorage.getItem("jwtToken");
+  const token = localStorage.getItem("jwtToken");
+  console.log("Retrieved Token:", token);
+  return token;
 };
 
 const removeToken = () => {
@@ -36,37 +39,39 @@ const removeToken = () => {
 };
 
 
-  useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
-    if (!token) {
-      console.log("token not found");  
-        setIsAuthenticated(false);
-        setLoading(false);
-        return;
-      }
+  // useEffect(() => {
+  //   const token = localStorage.getItem("jwtToken");
+  //   console.log("token verify useffect run and i call api");
+    
+  //   if (!token) {
+  //     console.log("token not found");  
+  //       setIsAuthenticated(false);
+  //       setLoading(false);
+  //       return;
+  //     }
 
-      axios
-      .post(`${API_ENDPOINT.POST.get_auth}`, {}, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            console.log("token  found from backend");
-            setIsAuthenticated(true);
-          } else {
-            console.log("token not found from backend");
-            setIsAuthenticated(false);
-          }
-        })
-        .catch((error) => {
-            console.error("Error validating token:", error);
-            setIsAuthenticated(false);
-          })
-          .finally(() => setLoading(false));
-  }, []);
+  //     axios
+  //     .post(`${API_ENDPOINT.POST.get_auth}/validate`, {}, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         if (res.status === 200) {
+  //           console.log("token  found from backend");
+  //           setIsAuthenticated(true);
+  //         } else {
+  //           console.log("token not found from backend");
+  //           setIsAuthenticated(false);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //           console.error("Error validating token:", error);
+  //           setIsAuthenticated(false);
+  //         })
+  //         .finally(() => setLoading(false));
+  // }, []);
 
   useEffect(() => {
     localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
@@ -81,6 +86,7 @@ const removeToken = () => {
       isAuthenticated, 
       setIsAuthenticated, 
       loading, 
+      setLoading,
       setToken, 
       getToken, 
       removeToken, 
