@@ -33,11 +33,16 @@ import ReviewForm from './components/Reviews/ReviewForm.jsx';
 import OrderDetails from './pages/ProtectedRoutes/OrderDetails/OrderDetails.jsx';
 import BodyShimmerUI from './ShimmerUI/BodyShimmerUI/BodyShimmerUI.jsx';
 import CartShimmerUI from './ShimmerUI/CartShimmerUI/CartShimmerUI.jsx';
+import CustomErrorBoundary from './components/ErrorBoundary/CustomErrorBoundary.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: (
+      <CustomErrorBoundary>
+        <App />
+      </CustomErrorBoundary>
+    ),
     children: [
       {
         index: true,
