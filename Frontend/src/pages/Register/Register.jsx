@@ -6,6 +6,8 @@ import AuthContext from '../../Context/AuthProvider';
 import { API_ENDPOINT } from '../../apiClient/apiEndPoint';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router";
+import { BiShow } from "react-icons/bi";
+import { BiHide } from "react-icons/bi";
 
 const Register = () => {
 
@@ -15,6 +17,8 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [isTermsChecked, setIsTermsChecked] = useState(false);
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { setUserEmail } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -65,7 +69,7 @@ const Register = () => {
           confirmPassword
         }, config);
 
-        if(data.success) {
+        if (data.success) {
           sessionStorage.setItem('email', email);
           setUserEmail(email);
           toast.success(data.message);
@@ -73,7 +77,7 @@ const Register = () => {
           setPassword('')
           setConfirmPassword('')
           navigate('/verify-otp');
-        }else {
+        } else {
           toast.error(data.message);
         }
 
@@ -117,35 +121,56 @@ const Register = () => {
             </div>
           }
         </div>
-        <div className="mb-5">
+        <div className="relative mb-5">
           <label htmlFor="password" className="block mb-2 text-sm font-medium font-roboto">Your password</label>
-          <input
-            type="password"
-            id="password"
-            className="shadow-inner  border border-gray-300  block w-full p-2.5 rounded-lg outline-none"
-            onChange={(e) => {
-              setPassword(e.target.value);
-              setErrors({ ...errors, password: '' });
-            }}
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={password}
+              className="shadow-inner border border-gray-300 block w-full p-2.5 rounded-lg outline-none pr-10"
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setErrors({ ...errors, password: "" });
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+            >
+              {showPassword ? <BiHide className="size-5 text-gray-950" /> : <BiShow className="size-5 text-gray-950" />}
+            </button>
+          </div>
           {errors.password &&
-            <div className='flex items-center mb-5 space-x-1'>
+            <div className='flex items-center mt-2 space-x-1'>
               <RiErrorWarningFill className='size-5 mt-[2px] text-red-600' />
               <p className="text-red-600 text-sm">{errors.password}</p>
             </div>
           }
         </div>
-        <div className="mb-5">
+
+        <div className="relative  mb-5">
           <label htmlFor="confirmpassword" className="block mb-2 text-sm font-medium font-roboto">Confirm password</label>
-          <input
-            type="password"
-            id="confirmpassword"
-            className="shadow-inner  border border-gray-300  block w-full p-2.5 rounded-lg outline-none"
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-              setErrors({ ...errors, confirmPassword: '' });
-            }}
-          />
+          <div className='relative'>
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              id="confirmpassword"
+              className="shadow-inner  border border-gray-300  block w-full p-2.5 rounded-lg outline-none"
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                setErrors({ ...errors, confirmPassword: '' });
+              }}
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+            >
+              {showConfirmPassword ? <BiHide className="size-5 text-gray-950" /> : <BiShow className="size-5 text-gray-950" />}
+            </button>
+          </div>
           {errors.confirmPassword &&
             <div className='flex items-center mb-5 space-x-1'>
               <RiErrorWarningFill className='size-5 mt-[2px] text-red-600' />
@@ -181,15 +206,15 @@ const Register = () => {
           onClick={handleSubmit}
           className={`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full mb-5 ${loading ? 'cursor-wait' : 'cursor-pointer'}`}
           disabled={loading}
-          >
+        >
           {loading ? 'Submitting...' : 'Verify your email id'}
         </button>
         <hr />
         <div className='text-sm font-medium text-customGray mt-5'>
           Already have an account?
           <span
-          onClick={() => navigate('/login')} 
-          className='ml-2 hover:underline cursor-pointer text-sky-600'>Sign in</span>
+            onClick={() => navigate('/login')}
+            className='ml-2 hover:underline cursor-pointer text-sky-600'>Sign in</span>
         </div>
       </form>
     </div>

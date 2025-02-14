@@ -3,7 +3,7 @@ import React from 'react'
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
     return (
-        <div role="alert" className="p-4 bg-red-100 text-red-700">
+        <div role="alert" className="p-4  text-red-700 max-w-[500px] mx-auto mt-20 text-center">
             <p className="font-bold">Something went wrong:</p>
             <pre className="mt-2">{error.message}</pre>
             <button

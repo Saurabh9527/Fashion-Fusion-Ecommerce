@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import AuthContext from '../../Context/AuthProvider';
 import { RiErrorWarningFill } from "react-icons/ri";
 import axios from 'axios';
+import { BiShow } from "react-icons/bi";
+import { BiHide } from "react-icons/bi";
 
 const Login = () => {
 
@@ -13,6 +15,7 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [isTermsChecked, setIsTermsChecked] = useState(false);
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { setToken } = useContext(AuthContext)
 
@@ -76,8 +79,13 @@ const Login = () => {
 
   }
 
-  const handleCreateNewAccount = () =>{
-    navigate('/register') 
+  const handleCreateNewAccount = () => {
+    navigate('/register')
+  }
+
+  const handleGuestUser = () => {
+    setEmail("guest@example.com")
+    setPassword('1234')
   }
 
   return (
@@ -91,6 +99,7 @@ const Login = () => {
             id="email"
             className="shadow-inner  border border-gray-300   block w-full p-2.5 rounded-lg outline-none"
             placeholder="name@fashionfusion.com"
+            value={email}
             onChange={(e) => {
               setEmail(e.target.value);
               setErrors({ ...errors, email: '' });
@@ -103,24 +112,35 @@ const Login = () => {
             </div>
           }
         </div>
-        <div className="mb-5">
+        <div className="relative mb-5">
           <label htmlFor="password" className="block mb-2 text-sm font-medium font-roboto">Your password</label>
-          <input
-            type="password"
-            id="password"
-            className="shadow-inner  border border-gray-300  block w-full p-2.5 rounded-lg outline-none"
-            onChange={(e) => {
-              setPassword(e.target.value);
-              setErrors({ ...errors, password: '' });
-            }}
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={password}
+              className="shadow-inner border border-gray-300 block w-full p-2.5 rounded-lg outline-none pr-10"
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setErrors({ ...errors, password: "" });
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+            >
+              {showPassword ? <BiHide className="size-5 text-gray-950" /> : <BiShow className="size-5 text-gray-950" />}
+            </button>
+          </div>
           {errors.password &&
-            <div className='flex items-center mb-5 space-x-1'>
+            <div className='flex items-center mt-2 space-x-1'>
               <RiErrorWarningFill className='size-5 mt-[2px] text-red-600' />
               <p className="text-red-600 text-sm">{errors.password}</p>
             </div>
           }
         </div>
+
         <div className="flex items-start mb-5">
           <div className="flex items-center h-5">
             <input
@@ -132,7 +152,7 @@ const Login = () => {
                 setErrors({ ...errors, terms: '' });
               }}
               className="w-4 h-4 border border-gray-300 rounded "
-              
+
             />
           </div>
           <label
@@ -140,22 +160,28 @@ const Login = () => {
             className="ms-2 text-sm font-medium">I agree with the <a href="#" className="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>
           </label>
         </div>
-                {errors.terms &&
-                  <div className='flex items-center mb-5 space-x-1'>
-                    <RiErrorWarningFill className='size-5 mt-[2px] text-red-600' />
-                    <p className="text-red-600 text-sm">{errors.terms}</p>
-                  </div>
-                }
+        {errors.terms &&
+          <div className='flex items-center mb-5 space-x-1'>
+            <RiErrorWarningFill className='size-5 mt-[2px] text-red-600' />
+            <p className="text-red-600 text-sm">{errors.terms}</p>
+          </div>
+        }
         <button
           onClick={handleSubmit}
-          className={`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full mb-2 ${loading ? 'cursor-wait' : 'cursor-pointer'}` }
+          className={`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full mb-2 ${loading ? 'cursor-wait' : 'cursor-pointer'}`}
           disabled={loading}
-          >{loading ? 'Submitting...' : 'Sign in'}
+        >{loading ? 'Submitting...' : 'Sign in'}
         </button>
-        <div 
-        className='text-end mb-5 text-blue-600 hover:underline cursor-pointer text-sm font-medium'
-        onClick={()=>navigate('/updatePassword')}>Forgot password</div>
-
+        <div className='flex justify-between'>
+          <div
+            className='text-end mb-5 text-blue-600 hover:underline cursor-pointer text-sm font-medium'
+            onClick={handleGuestUser}>Guest User
+          </div>
+          <div
+            className='text-end mb-5 text-blue-600 hover:underline cursor-pointer text-sm font-medium'
+            onClick={() => navigate('/updatePassword')}>Forgot password
+          </div>
+        </div>
         <div className="flex items-center space-x-1 mb-5">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
           <p className="px-3 text-sm dark:text-gray-600">New to Fashionfusion?</p>
@@ -164,7 +190,7 @@ const Login = () => {
 
         <div>
           <button className='border border-gray-200 shadow-md py-2 px-3 w-full rounded-lg hover:bg-gray-50 text-base font-normal'
-          onClick={handleCreateNewAccount}>Create your Fashionfusion account</button>
+            onClick={handleCreateNewAccount}>Create your Fashionfusion account</button>
         </div>
       </form>
     </div>

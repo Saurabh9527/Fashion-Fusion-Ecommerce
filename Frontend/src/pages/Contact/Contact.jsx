@@ -2,12 +2,22 @@
 import React, { useEffect, useState } from 'react'
 import { IoIosCall } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
+import { toast } from 'react-toastify';
 
 const Contact = () => {
 
     const [email, setEmail] = useState('');
     const [contactNo, setContactNo] = useState('');
     const [message, setMessage] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        toast.success("Successfull! We'll get back to you shortly.")
+        setEmail("");
+        setContactNo("");
+        setMessage("");
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -44,7 +54,9 @@ const Contact = () => {
                         </div>
                         {/* form */}
                         <div className="rounded w-full shadow-lg">
-                            <form className='p-2 pl-5 pr-5'>
+                            <form 
+                            onSubmit={handleSubmit}
+                            className='p-2 pl-5 pr-5'>
                                 <div className="mb-4">
                                     <label htmlFor="email" className="block text-sm font-medium text-black">
                                         Your Email:
