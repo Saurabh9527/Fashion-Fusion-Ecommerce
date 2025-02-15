@@ -161,7 +161,7 @@ const Products = () => {
         />
 
         {suggestions.length > 0 && (
-          <div className="absolute bg-white border border-gray-300 w-[300px] mt-1 rounded-md shadow-lg">
+          <div className="absolute bg-white border border-gray-300 w-[300px] mt-1 rounded-md shadow-lg z-50">
             {suggestions.map((suggestion) => (
               <div
                 key={suggestion.id}

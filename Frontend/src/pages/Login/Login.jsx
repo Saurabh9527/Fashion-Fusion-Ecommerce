@@ -84,7 +84,7 @@ const Login = () => {
   }
 
   const handleGuestUser = () => {
-    setEmail("guest@example.com")
+    setEmail("fashionfusionguest@gmail.com")
     setPassword('1234')
   }
 
