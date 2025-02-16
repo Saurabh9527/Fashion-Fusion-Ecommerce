@@ -118,6 +118,7 @@ const Products = () => {
       return;
     }
 
+    setSearch(query);
     setSearchQuery(query);
     if (query) {
       const filteredSuggestions = suggetionList.filter(item =>
@@ -156,7 +157,7 @@ const Products = () => {
           type="search"
           placeholder='Search products...'
           className='py-2 px-3 border border-gray-300 shadow-sm hover:shadow-md w-[300px] rounded-md outline-none text-gray-900'
-          value={searchQuery}
+          value={search}
           onChange={handleSearchChange}
         />
 
