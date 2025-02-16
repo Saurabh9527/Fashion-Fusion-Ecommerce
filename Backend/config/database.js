@@ -7,7 +7,12 @@ dotenv.config({
 })
 
 const mongoURL = process.env.MONGO_URL
-mongoose.connect(mongoURL);
+//mongoose.connect(mongoURL);
+mongoose.connect(mongoURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true,
+});
 
 const db = mongoose.connection;
 
