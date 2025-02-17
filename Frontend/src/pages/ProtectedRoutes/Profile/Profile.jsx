@@ -1,7 +1,10 @@
 
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import ProfileDashboard from '../../../components/Profile/ProfileDashboard'
-import ProductCarousel from '../../../components/Product-Carousel/ProductCarousel'
+
+const ProductCarousel = lazy(() =>
+  import('../../../components/Product-Carousel/ProductCarousel')
+);
 
 const Profile = () => {
   return (
@@ -13,7 +16,9 @@ const Profile = () => {
           <ProfileDashboard />
         </div>
         </div>
-        <ProductCarousel />
+        <Suspense fallback={<div>Loading Carousel...</div>}>
+          <ProductCarousel />
+        </Suspense>
       </div>
     </div>
   )
