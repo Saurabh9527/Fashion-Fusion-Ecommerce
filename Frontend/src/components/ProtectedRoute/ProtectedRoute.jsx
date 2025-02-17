@@ -11,10 +11,10 @@ const ProtectedRoute = ({ children }) => {
     
       useEffect(() => {
         const token = getToken();
-        console.log("token verify useffect run and i call api");
+        //console.log("token verify useffect run and i call api");
         
         if (!token) {
-          console.log("token not found");  
+          //console.log("token not found");  
             setIsAuthenticated(false);
             setLoading(false);
             setIsTokenValidated(true);
@@ -30,10 +30,10 @@ const ProtectedRoute = ({ children }) => {
           })
             .then((res) => {
               if (res.status === 200) {
-                console.log("token  found from backend");
+                //console.log("token  found from backend");
                 setIsAuthenticated(true);
               } else {
-                console.log("token not found from backend");
+                //console.log("token not found from backend");
                 setIsAuthenticated(false);
               }
             })

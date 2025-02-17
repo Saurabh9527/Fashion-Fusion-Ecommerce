@@ -40,7 +40,7 @@ const CheckoutPage = () => {
                 withCredentials: true,
             };
             const {data} = await axios.delete(`${API_ENDPOINT.DELETE.delete_address}/deleteAddress/${addressId}`, config)
-            console.log(data);
+            //console.log(data);
             triggerRefetch();
             
         } catch (error) {

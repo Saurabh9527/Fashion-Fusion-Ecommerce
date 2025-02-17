@@ -6,13 +6,13 @@ import { MdArrowBackIos } from "react-icons/md";
 const Pagination = ({ pageNo, onPageChange, totalPages }) => {
 
     const handleNext = () => {
-        console.log("i click");
+        //console.log("i click");
         
         onPageChange(pageNo + 1)
     }
 
     const handlePrevious = () => {
-        console.log("i click prev")
+        //console.log("i click prev")
         onPageChange(pageNo - 1)
     }
 

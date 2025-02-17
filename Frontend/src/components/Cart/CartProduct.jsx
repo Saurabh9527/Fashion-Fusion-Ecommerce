@@ -91,7 +91,7 @@ const CartProduct = ({ product, onQuantityUpdate }) => {
       config
     );
 
-    console.log(data);
+    //console.log(data);
     
     
     onQuantityUpdate();

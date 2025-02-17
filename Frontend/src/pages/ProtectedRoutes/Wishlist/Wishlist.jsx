@@ -9,7 +9,7 @@ function Wishlist() {
 
   const { products, loading, error, refetch } = useWishlistProduct();
   const navigate = useNavigate();
-  console.log(products);
+  //console.log(products);
   
   if (error) {
     return <div>{error}</div>

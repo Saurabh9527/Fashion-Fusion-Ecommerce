@@ -24,13 +24,13 @@ export const AuthProvider = ({ children }) => {
 
 
 const setToken = (token) => {
-  console.log("Storing Token:", token);
+ // console.log("Storing Token:", token);
   localStorage.setItem("jwtToken", token);
 };
 
 const getToken = () => {
   const token = localStorage.getItem("jwtToken");
-  console.log("Retrieved Token:", token);
+ // console.log("Retrieved Token:", token);
   return token;
 };
 
