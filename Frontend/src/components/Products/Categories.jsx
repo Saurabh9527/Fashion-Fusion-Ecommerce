@@ -55,7 +55,7 @@ const Categories = ({ handleCategoryChange }) => {
 
       {/* Mobile Categories */}
       {isMenuOpen && (
-        <div className='absolute top-12 left-0 w-1/2 bg-white shadow-md p-4 md:hidden'>
+        <div className='absolute top-12 left-0 w-1/2 bg-white shadow-md p-4 md:hidden z-50'>
           <ul className='flex flex-col space-y-3 cursor-pointer'>
             <li
               className='text-gray-700 hover:text-gray-900 transition-all duration-300'
