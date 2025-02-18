@@ -19,7 +19,7 @@ const ProductShowcase = () => {
                 <Link to={`/product/${firstProduct._id}`}> 
                     <img 
                     src={firstProduct?.thumbnail} 
-                    alt={firstProduct?.name} 
+                    alt={firstProduct?.title} 
                     className="h-full w-full object-cover border border-gray-200 rounded-sm shadow-sm hover:shadow-xl zoom"/>
                 </Link>
             </div> 
@@ -29,13 +29,13 @@ const ProductShowcase = () => {
                 <Link to={`/product/${nextTwoProducts[0]._id}`}>
                     <img 
                     src={nextTwoProducts[0]?.thumbnail} 
-                    alt={nextTwoProducts[0]?.name} 
+                    alt={nextTwoProducts[0]?.title} 
                     className='w-full h-full object-cover border border-gray-200 rounded-sm shadow-sm hover:shadow-xl zoom'/>
                 </Link>
                 <Link to={`/product/${nextTwoProducts[1]._id}`}>
                     <img 
                     src={nextTwoProducts[1]?.thumbnail} 
-                    alt={nextTwoProducts[1]?.name} 
+                    alt={nextTwoProducts[1]?.title} 
                     className='w-full h-full object-cover border border-gray-200 rounded-sm shadow-sm hover:shadow-xl zoom'/>
                 </Link>
                 </div>
@@ -44,13 +44,13 @@ const ProductShowcase = () => {
                 <Link to={`/product/${lastTwoProducts[0]._id}`}>
                     <img 
                     src={lastTwoProducts[0]?.thumbnail} 
-                    alt={lastTwoProducts[0]?.name} 
+                    alt={lastTwoProducts[0]?.title} 
                     className='w-full h-full object-cover border border-gray-200 rounded-sm shadow-sm hover:shadow-xl zoom'/>
                 </Link>
                 <Link to={`/product/${lastTwoProducts[1]._id}`}>
                     <img 
                     src={lastTwoProducts[1]?.thumbnail} 
-                    alt={lastTwoProducts[1]?.name} 
+                    alt={lastTwoProducts[1]?.title} 
                     className='w-full h-full object-cover border border-gray-200 rounded-sm shadow-sm hover:shadow-xl zoom'/>
                 </Link>
                 </div>
